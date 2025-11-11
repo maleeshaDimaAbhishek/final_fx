@@ -11,7 +11,7 @@
 <HBox prefHeight="500" prefWidth="700" spacing="0" stylesheets="@login.css"
       xmlns:fx="http://javafx.com/fxml/1"
       xmlns="http://javafx.com/javafx/25"
-      fx:controller="edu.MD.GymBackend.controller.LoginController">
+      fx:controller="edu.MD.Fx_final.controller.OTPLoginController">
 
     <!-- Left side image -->
     <StackPane fx:id="leftPane" HBox.hgrow="ALWAYS">
@@ -34,7 +34,7 @@
                     <TextField fx:id="txtOtp" promptText="Enter 4-digit OTP" maxWidth="200" />
                 </VBox>
 
-                <Button fx:id="btnLogin" onAction="#handleLoginAction" styleClass="login-button" text="Login" />
+                <Button fx:id="btnLogin" onAction="#btnGetOTP" styleClass="login-button" text="Login" />
 
                 <Label styleClass="forget-label" text="Didn't get the OTP? Resend" />
 
