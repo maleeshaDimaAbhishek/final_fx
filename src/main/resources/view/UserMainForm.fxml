@@ -1,14 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="edu.MD.Fx_final.controller.UserMainFormController"
-            prefHeight="400.0" prefWidth="600.0">
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="edu.MD.Fx_final.controller.UserDashBoardFormController"
+            prefWidth="900" prefHeight="600"
+            style="-fx-background-color: linear-gradient(to bottom right, #f8f9fa, #e05f89, #563d7c);">
 
-</AnchorPane>
+    <!-- 🔹 Top Navigation Bar -->
+    <top>
+        <HBox spacing="30" alignment="CENTER_RIGHT"
+              style="-fx-padding: 15; -fx-background-color: rgba(255,255,255,0.3); -fx-background-radius: 20;">
+            <Label text="Payment" onMouseClicked="#onPaymentClick" style="-fx-font-weight: bold; -fx-cursor: hand;" />
+            <Label text="Return Book" onMouseClicked="#onReturnClick" style="-fx-font-weight: bold; -fx-cursor: hand;" />
+            <Label text="Borrow Book" onMouseClicked="#onBorrowClick" style="-fx-font-weight: bold; -fx-cursor: hand;" />
+            <Label text="Logout" onMouseClicked="#onLogoutClick" style="-fx-font-weight: bold; -fx-cursor: hand;" />
+        </HBox>
+    </top>
+
+    <!-- 🔹 Center Book Grid -->
+    <center>
+        <ScrollPane fitToWidth="true" fitToHeight="true"
+                    style="-fx-background-color: transparent;">
+            <FlowPane fx:id="bookContainer"
+                      alignment="CENTER"
+                      hgap="20" vgap="20"
+                      prefWrapLength="800"
+                      style="-fx-background-color: transparent;">
+                <padding>
+                    <Insets top="20" right="20" bottom="20" left="20"/>
+                </padding>
+                <!-- Books will be dynamically added here -->
+            </FlowPane>
+        </ScrollPane>
+    </center>
+</BorderPane>
