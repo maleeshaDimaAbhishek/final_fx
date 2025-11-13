@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="edu.MD.Fx_final.controller.UserRegistrationFormController"
+            prefWidth="600" prefHeight="500"
+            style="-fx-background-color: linear-gradient(to bottom right, #f8f9fa, #e05f89, #563d7c);">
+
+    <VBox alignment="CENTER" spacing="15"
+          layoutX="100" layoutY="50"
+          prefWidth="400"
+          style="-fx-background-color: rgba(255,255,255,0.8); -fx-padding: 30; -fx-background-radius: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0, 0, 4);">
+
+        <!-- 🔹 Title -->
+        <Label text="User Registration"
+               style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #563d7c;" />
+
+        <!-- 🔹 NIC -->
+        <HBox spacing="10" alignment="CENTER_LEFT">
+            <Label text="NIC:" prefWidth="120" style="-fx-font-weight: bold;" />
+            <TextField fx:id="txtNIC" promptText="Enter NIC" prefWidth="220"/>
+        </HBox>
+
+        <!-- 🔹 Name -->
+        <HBox spacing="10" alignment="CENTER_LEFT">
+            <Label text="Name:" prefWidth="120" style="-fx-font-weight: bold;" />
+            <TextField fx:id="txtName" promptText="Enter Full Name" prefWidth="220"/>
+        </HBox>
+
+        <!-- 🔹 Date of Birth -->
+        <HBox spacing="10" alignment="CENTER_LEFT">
+            <Label text="Date of Birth:" prefWidth="120" style="-fx-font-weight: bold;" />
+            <DatePicker fx:id="dpDOB" promptText="MM/DD/YYYY" prefWidth="220"/>
+        </HBox>
+
+        <!-- 🔹 Email -->
+        <HBox spacing="10" alignment="CENTER_LEFT">
+            <Label text="Email:" prefWidth="120" style="-fx-font-weight: bold;" />
+            <TextField fx:id="txtEmail" promptText="example@gmail.com" prefWidth="220"/>
+        </HBox>
+
+        <!-- 🔹 Phone Number -->
+        <HBox spacing="10" alignment="CENTER_LEFT">
+            <Label text="Phone:" prefWidth="120" style="-fx-font-weight: bold;" />
+            <TextField fx:id="txtPhone" promptText="Enter phone number" prefWidth="220"/>
+        </HBox>
+
+        <!-- 🔹 Address -->
+        <HBox spacing="10" alignment="CENTER_LEFT">
+            <Label text="Address:" prefWidth="120" style="-fx-font-weight: bold;" />
+            <TextField fx:id="txtAddress" promptText="Enter address" prefWidth="220"/>
+        </HBox>
+
+        <!-- 🔹 Buttons -->
+        <HBox spacing="20" alignment="CENTER"  stylesheets="@../style/login.css" >
+            <Button text="Register"
+                    fx:id="btnRegister"
+                    styleClass="login-button"
+                    onAction="#onRegisterClick"
+                    style="-fx-background-color: #563d7c; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 10; -fx-padding: 8 20;" />
+
+            <Button text="Back"
+                    fx:id="btnBack"
+                    styleClass="login-button"
+                    onAction="#onBackClick"
+                    style="-fx-background-color: #e05f89; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 10; -fx-padding: 8 20;" />
+        </HBox>
+
+    </VBox>
+</AnchorPane>

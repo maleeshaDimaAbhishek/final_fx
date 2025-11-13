@@ -12,14 +12,26 @@
 
     <!-- 🔹 Top Navigation Bar -->
     <top>
-        <HBox spacing="30" alignment="CENTER_RIGHT"
+        <HBox spacing="30" alignment="CENTER_LEFT"
               style="-fx-padding: 15; -fx-background-color: rgba(255,255,255,0.3); -fx-background-radius: 20;">
-            <Label text="Payment" onMouseClicked="#onPaymentClick" style="-fx-font-weight: bold; -fx-cursor: hand;" />
-            <Label text="Return Book" onMouseClicked="#onReturnClick" style="-fx-font-weight: bold; -fx-cursor: hand;" />
-            <Label text="Borrow Book" onMouseClicked="#onBorrowClick" style="-fx-font-weight: bold; -fx-cursor: hand;" />
-            <Label text="Logout" onMouseClicked="#onLogoutClick" style="-fx-font-weight: bold; -fx-cursor: hand;" />
+
+            <!-- 🔹 Left Logo/Title -->
+            <Label text="BookWorm.lk"
+                   style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: black;" />
+
+            <!-- 🔹 Spacer to push items to right -->
+            <Region HBox.hgrow="ALWAYS" />
+
+            <!-- 🔹 Right Menu Items -->
+            <HBox spacing="30" alignment="CENTER_RIGHT">
+                <Label text="Payment" onMouseClicked="#onPaymentClick" style="-fx-font-weight: bold; -fx-cursor: hand;" />
+                <Label text="Return Book" onMouseClicked="#onReturnClick" style="-fx-font-weight: bold; -fx-cursor: hand;" />
+                <Label text="Borrow Book" onMouseClicked="#onBorrowClick" style="-fx-font-weight: bold; -fx-cursor: hand;" />
+                <Label text="Logout" onMouseClicked="#onLogoutClick" style="-fx-font-weight: bold; -fx-cursor: hand;" />
+            </HBox>
         </HBox>
     </top>
+
 
     <!-- 🔹 Center Book Grid -->
     <center>

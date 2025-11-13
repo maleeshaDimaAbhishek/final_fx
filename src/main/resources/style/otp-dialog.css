@@ -1,0 +1,51 @@
+/* Common button styling */
+.button {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 10;
+    -fx-padding: 8 20;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 4, 0.3, 0, 2);
+    -fx-transition: all 0.3s ease;
+}
+
+/* Verify button */
+#btnVerify {
+    -fx-background-color: linear-gradient(to right, #4CAF50, #45a049);
+    -fx-text-fill: white;
+}
+
+/* Hover effect for Verify button */
+#btnVerify:hover {
+    -fx-background-color: linear-gradient(to right, #45a049, #3e8e41);
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+
+/* Click (pressed) effect for Verify button */
+#btnVerify:pressed {
+    -fx-background-color: #3e8e41;
+    -fx-scale-x: 0.98;
+    -fx-scale-y: 0.98;
+}
+
+/* Cancel button */
+#btnCancel {
+    -fx-background-color: linear-gradient(to right, #f44336, #e53935);
+    -fx-text-fill: white;
+}
+
+/* Hover effect for Cancel button */
+#btnCancel:hover {
+    -fx-background-color: linear-gradient(to right, #e53935, #d32f2f);
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+
+/* Click (pressed) effect for Cancel button */
+#btnCancel:pressed {
+    -fx-background-color: #c62828;
+    -fx-scale-x: 0.98;
+    -fx-scale-y: 0.98;
+}
+

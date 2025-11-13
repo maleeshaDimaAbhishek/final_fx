@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox prefHeight="500" prefWidth="700" spacing="0" stylesheets="@login.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/25" fx:controller="edu.MD.Fx_final.controller.LoginController">
+<HBox prefHeight="500" prefWidth="700" spacing="0" stylesheets="@../style/login.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/25" fx:controller="edu.MD.Fx_final.controller.LoginController">
 
     <!-- Left side image -->
     <StackPane fx:id="leftPane" HBox.hgrow="ALWAYS">
@@ -32,7 +32,11 @@
 
                 <Button fx:id="btnLogin" onAction="#handleLoginAction" styleClass="login-button" text="Get OTP" />
 
-                <Label styleClass="forget-label" text="Don't  Have Account" />
+                <Label text="Don't Have Account?"
+                       styleClass="forget-label"
+                       onMouseClicked="#onRegisterLabelClick"
+                       style="-fx-cursor: hand;" />
+
 
                 <ImageView fx:id="bookImage" fitWidth="100" preserveRatio="true" />
             </VBox>

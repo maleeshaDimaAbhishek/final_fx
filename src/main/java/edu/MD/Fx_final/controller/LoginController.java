@@ -17,6 +17,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import javax.swing.*;
@@ -25,6 +26,7 @@ public class LoginController {
     UserLoginService userLoginService = new UserLoginServiceImpl();
     Stage otpLogin = new Stage();
     OTPLoginController otpLoginController=new OTPLoginController();
+    Stage userRegistration=new Stage();
     int OTP;
     @FXML
     private TextField txtUsername;
@@ -89,4 +91,8 @@ public class LoginController {
         );
     }
 
+    public void onRegisterLabelClick(MouseEvent mouseEvent) throws IOException {
+        userRegistration.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/UserRegistration.fxml"))));
+        userRegistration.show();
+    }
 }

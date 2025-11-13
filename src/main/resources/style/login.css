@@ -60,16 +60,18 @@
     -fx-cursor: hand;
 }
 .login-button:hover {
-    -fx-opacity: 0.8;
+    -fx-background-color: linear-gradient(to right, #2575fc, #6a11cb);
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 8, 0, 0, 4);
+    -fx-opacity: 0.9;
 }
-
 /* Forget password */
 .forget-label {
     -fx-text-fill: #fff;
     -fx-font-size: 12px;
     -fx-underline: true;
 }
-
 /* Responsive adjustments */
 @media screen and (max-width: 800px) {
     .title-label {
