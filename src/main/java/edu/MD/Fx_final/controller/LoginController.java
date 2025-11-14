@@ -25,8 +25,8 @@ import javax.swing.*;
 
 public class LoginController {
     UserLoginService userLoginService = new UserLoginServiceImpl();
-    Stage otpLogin = new Stage();
     OTPLoginController otpLoginController=new OTPLoginController();
+    Stage otpLogin = new Stage();
     public static Stage userRegistration=new Stage();
     int OTP;
     @FXML

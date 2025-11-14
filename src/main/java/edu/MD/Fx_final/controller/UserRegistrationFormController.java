@@ -7,16 +7,22 @@ import edu.MD.Fx_final.service.UserRegistrationService;
 import edu.MD.Fx_final.service.UserRegistrationServiceImpl;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Random;
 
 public class UserRegistrationFormController {
     UserRegistrationService userRegistrationService=new UserRegistrationServiceImpl();
     int registrationOtp=0;
+    public static Stage OTPDialogBox=new Stage();
+
     @FXML
     private TextField txtNIC;
     @FXML
@@ -30,27 +36,33 @@ public class UserRegistrationFormController {
     @FXML
     private DatePicker dpDOB;
 
-    public void onRegisterClick(ActionEvent actionEvent) {
-        String userMail=txtEmail.getText();
-        String userName=txtName.getText();
+    String userMail;
+    String userName;
+    private ActionEvent actionEvent1;
+
+    public void onRegisterClick(ActionEvent actionEvent) throws IOException {
         if(validateFields()){
-            if (isValidEmail(txtEmail.getText())){
+            userMail=txtEmail.getText();
+            userName=txtName.getText();
+            if (isValidEmail(userMail)){
+                registrationOtp=generateOTP();
                 if(sendMail(userMail,registrationOtp,userName)){
-                    try {
-                        boolean b=userRegistrationService.UserRegisration(
-                                new UserRegistrationDetails(
-                                        txtNIC.getText(),
-                                        userName,
-                                        dpDOB.getValue(),
-                                        userMail,
-                                        txtPhone.getText(),
-                                        txtAddress.getText()
-                                )
-                        );
-                        System.out.println("registe");
-                    } catch (SQLException e) {
-                        throw new RuntimeException(e);
-                    }
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/OTPDialogBox.fxml"));
+                    Scene scene = new Scene(loader.load());
+
+                    OTPDialogController controller = loader.getController();
+                    controller.setOtp(registrationOtp);
+                    controller.setOnSuccess(() -> {
+                        try {
+                            registerUser();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    });
+
+                    OTPDialogBox.setScene(scene);
+                    OTPDialogBox.show();
+
                 }else {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Invalid Email or Connection Error");
@@ -88,6 +100,7 @@ public class UserRegistrationFormController {
                 "Welcome to Book Borrowing System 📚",
                 "Hello "+name+",\n\nYour Registration 0OTP is "+OTP+".\n\nThanks,\nTeam Library"
         );
+
     }
     //Email validation
     public static boolean isValidEmail(String email) {
@@ -108,6 +121,25 @@ public class UserRegistrationFormController {
         Random random = new Random();
         registrationOtp = 100000 + random.nextInt(900000);
         return registrationOtp;
+    }
+
+    public void registerUser() throws SQLException {
+        if (userRegistrationService.UserRegisration(
+                new UserRegistrationDetails(
+                        txtNIC.getText(),
+                        userName,
+                        dpDOB.getValue(),
+                        userMail,
+                        txtPhone.getText(),
+                        txtAddress.getText()
+                )
+        )) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setHeaderText(null);
+            alert.setContentText("Registration Successful!");
+            alert.show();
+            OTPDialogBox.hide();
+        }
     }
 
 }
