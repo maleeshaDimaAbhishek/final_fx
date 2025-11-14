@@ -4,6 +4,7 @@ package edu.MD.Fx_final.controller;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import edu.MD.Fx_final.Starter;
 import edu.MD.Fx_final.Utill.EmailUtil;
 import edu.MD.Fx_final.model.UserLoginDetails;
 import edu.MD.Fx_final.service.UserLoginService;
@@ -26,7 +27,7 @@ public class LoginController {
     UserLoginService userLoginService = new UserLoginServiceImpl();
     Stage otpLogin = new Stage();
     OTPLoginController otpLoginController=new OTPLoginController();
-    Stage userRegistration=new Stage();
+    public static Stage userRegistration=new Stage();
     int OTP;
     @FXML
     private TextField txtUsername;
@@ -45,15 +46,13 @@ public class LoginController {
     public void handleLoginAction(ActionEvent actionEvent) throws IOException {
         UserLoginDetails userLoginDetails;
         boolean result = false;
-        OTP = otpLoginController.generateOTP(); // You can keep this if it's a static or helper method
+        OTP = otpLoginController.generateOTP();
         boolean isCorrectOTP = false;
-
         try {
             userLoginDetails = userLoginService.checkUserRole(txtUsername.getText());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        //check is user valid
         if (userLoginDetails != null) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/OTPLogin.fxml"));
             Parent root = loader.load();
@@ -94,5 +93,6 @@ public class LoginController {
     public void onRegisterLabelClick(MouseEvent mouseEvent) throws IOException {
         userRegistration.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/UserRegistration.fxml"))));
         userRegistration.show();
+        Starter.loginFormReference.hide();
     }
 }
