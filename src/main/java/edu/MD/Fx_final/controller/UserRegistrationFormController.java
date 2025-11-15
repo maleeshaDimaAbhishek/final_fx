@@ -49,7 +49,6 @@ public class UserRegistrationFormController {
                 if(sendMail(userMail,registrationOtp,userName)){
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/OTPDialogBox.fxml"));
                     Scene scene = new Scene(loader.load());
-
                     OTPDialogController controller = loader.getController();
                     controller.setOtp(registrationOtp);
                     controller.setOnSuccess(() -> {
@@ -59,7 +58,7 @@ public class UserRegistrationFormController {
                             e.printStackTrace();
                         }
                     });
-
+                    LoginController.userRegistration.hide();
                     OTPDialogBox.setScene(scene);
                     OTPDialogBox.show();
 
@@ -134,12 +133,14 @@ public class UserRegistrationFormController {
                         txtAddress.getText()
                 )
         )) {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            Starter.loginFormReference.show();
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setHeaderText(null);
             alert.setContentText("Registration Successful!");
             alert.show();
             OTPDialogBox.hide();
         }
+
     }
 
 }

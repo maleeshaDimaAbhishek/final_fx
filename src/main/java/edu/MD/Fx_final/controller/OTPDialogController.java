@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
+import lombok.Setter;
 
 public class OTPDialogController {
 
@@ -11,26 +12,17 @@ public class OTPDialogController {
     private TextField txtOTP;
 
     private int registrationOtp;
+    @Setter
     private Runnable onSuccess;
 
     public void setOtp(int otp) {
         this.registrationOtp = otp;
     }
-
-    public void setOnSuccess(Runnable r) {
-        this.onSuccess = r;
-    }
-
     @FXML
     public void onVerifyClick(ActionEvent event) {
         if (txtOTP.getText() == null) return;
 
         if (registrationOtp == Integer.parseInt(txtOTP.getText())) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setHeaderText(null);
-            alert.setContentText("OTP Verified!");
-            alert.show();
-
             if (onSuccess != null) onSuccess.run();
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);

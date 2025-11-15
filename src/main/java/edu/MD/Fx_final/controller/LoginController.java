@@ -26,7 +26,7 @@ import javax.swing.*;
 public class LoginController {
     UserLoginService userLoginService = new UserLoginServiceImpl();
     OTPLoginController otpLoginController=new OTPLoginController();
-    Stage otpLogin = new Stage();
+    public static  Stage otpLogin ;
     public static Stage userRegistration=new Stage();
     int OTP;
     @FXML
@@ -58,7 +58,7 @@ public class LoginController {
             Parent root = loader.load();
             OTPLoginController otpController = loader.getController();
             otpController.setOTP(OTP);
-            Stage otpLogin = new Stage();
+            otpLogin = new Stage();
             otpLogin.setScene(new Scene(root));
             otpLogin.show();
             result = sendMail(userLoginDetails.getMail(), OTP, userLoginDetails.getName());
