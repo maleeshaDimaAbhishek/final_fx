@@ -1,8 +1,7 @@
-package edu.MD.Fx_final.model;
+package edu.MD.Fx_final.model.dto;
 
 import lombok.*;
 
-import java.sql.Date;
 import java.time.LocalDate;
 
 @Getter
@@ -10,7 +9,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class UserRegistrationDetails {
+public class UserRegistrationDTO {
  private String NIC;
  private String name;
  private LocalDate dob;

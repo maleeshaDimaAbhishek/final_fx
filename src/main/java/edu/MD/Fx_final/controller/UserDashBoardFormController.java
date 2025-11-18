@@ -1,8 +1,10 @@
 package edu.MD.Fx_final.controller;
 
-import edu.MD.Fx_final.model.BookCardDetails;
-import edu.MD.Fx_final.service.UserDashBoardService;
-import edu.MD.Fx_final.service.UserDashBoardServiceImpl;
+import edu.MD.Fx_final.model.dto.BookCardDTO;
+import edu.MD.Fx_final.service.BookService;
+import edu.MD.Fx_final.service.UserService;
+import edu.MD.Fx_final.service.impl.BookServiceImpl;
+import edu.MD.Fx_final.service.impl.UserServiceImpl;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -16,9 +18,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDashBoardFormController {
-    UserDashBoardService userDashBoardService=new UserDashBoardServiceImpl();
-    BookCardDetails bookCardDetails=new BookCardDetails();
-    List<BookCardDetails> bookCardDetailsList=new ArrayList<>();
+    UserService userService=new UserServiceImpl();
+    BookService bookService=new BookServiceImpl();
+    List<BookCardDTO> bookCardDetailsList=new ArrayList<>();
     @FXML
     private FlowPane bookContainer;
 
@@ -29,8 +31,8 @@ public class UserDashBoardFormController {
 
     private void loadBooksFromDatabase() {
         try {
-           bookCardDetailsList= userDashBoardService.getAllBookDetails();
-           for(BookCardDetails bookCardDetails1:bookCardDetailsList) {
+           bookCardDetailsList= bookService.getAllBookDetails();
+           for(BookCardDTO bookCardDetails1:bookCardDetailsList) {
                VBox bookCard = createBookCard(bookCardDetails1.getTitle(),
                        bookCardDetails1.getAuthor(),
                        bookCardDetails1.getPublisher(),

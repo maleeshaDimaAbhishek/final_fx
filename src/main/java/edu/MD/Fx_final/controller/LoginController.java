@@ -6,9 +6,9 @@ import java.sql.SQLException;
 
 import edu.MD.Fx_final.Starter;
 import edu.MD.Fx_final.Utill.EmailUtil;
-import edu.MD.Fx_final.model.UserLoginDetails;
-import edu.MD.Fx_final.service.UserLoginService;
-import edu.MD.Fx_final.service.UserLoginServiceImpl;
+import edu.MD.Fx_final.model.dto.UserLoginDTO;
+import edu.MD.Fx_final.service.UserService;
+import edu.MD.Fx_final.service.impl.UserServiceImpl;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,7 +24,7 @@ import javafx.stage.Stage;
 import javax.swing.*;
 
 public class LoginController {
-    UserLoginService userLoginService = new UserLoginServiceImpl();
+    UserService userService = new UserServiceImpl();
     OTPLoginController otpLoginController=new OTPLoginController();
     public static  Stage otpLogin ;
     public static Stage userRegistration=new Stage();
@@ -44,12 +44,12 @@ public class LoginController {
         libraryImage.setImage(new Image("/image/openbook.jpeg"));
     }
     public void handleLoginAction(ActionEvent actionEvent) throws IOException {
-        UserLoginDetails userLoginDetails;
+        UserLoginDTO userLoginDetails;
         boolean result = false;
         OTP = otpLoginController.generateOTP();
         boolean isCorrectOTP = false;
         try {
-            userLoginDetails = userLoginService.checkUserRole(txtUsername.getText());
+            userLoginDetails = userService.checkUserRole(txtUsername.getText());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

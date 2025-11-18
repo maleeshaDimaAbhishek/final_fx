@@ -2,9 +2,9 @@ package edu.MD.Fx_final.controller;
 
 import edu.MD.Fx_final.Starter;
 import edu.MD.Fx_final.Utill.EmailUtil;
-import edu.MD.Fx_final.model.UserRegistrationDetails;
-import edu.MD.Fx_final.service.UserRegistrationService;
-import edu.MD.Fx_final.service.UserRegistrationServiceImpl;
+import edu.MD.Fx_final.model.dto.UserRegistrationDTO;
+import edu.MD.Fx_final.service.UserService;
+import edu.MD.Fx_final.service.impl.UserServiceImpl;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,7 +19,7 @@ import java.sql.SQLException;
 import java.util.Random;
 
 public class UserRegistrationFormController {
-    UserRegistrationService userRegistrationService=new UserRegistrationServiceImpl();
+    UserService userService=new UserServiceImpl();
     int registrationOtp=0;
     public static Stage OTPDialogBox=new Stage();
 
@@ -123,8 +123,8 @@ public class UserRegistrationFormController {
     }
 
     public void registerUser() throws SQLException {
-        if (userRegistrationService.UserRegisration(
-                new UserRegistrationDetails(
+        if (userService.UserRegistration(
+                new UserRegistrationDTO(
                         txtNIC.getText(),
                         userName,
                         dpDOB.getValue(),

@@ -1,11 +1,8 @@
 package edu.MD.Fx_final.repository;
 
-import edu.MD.Fx_final.model.BookCardDetails;
-import edu.MD.Fx_final.model.UserRegistrationDetails;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public interface UserDashBoardRepository {
+public interface BookRepository {
     ResultSet getAllBookDetails() throws SQLException;
 }

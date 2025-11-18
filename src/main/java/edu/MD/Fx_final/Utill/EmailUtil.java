@@ -7,7 +7,7 @@ import java.util.Properties;
 public class EmailUtil {
 
     public static boolean sendEmail(String toEmail, String subject, String messageText) {
-        final String fromEmail = "";
+        final String fromEmail = "maleeshadimal20@gmail.com";
         final String password = "";
 
         // SMTP properties

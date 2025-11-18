@@ -1,4 +1,4 @@
-package edu.MD.Fx_final.model;
+package edu.MD.Fx_final.model.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,7 +9,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class UserLoginDetails {
+public class UserLoginDTO {
     private String mail;
     private int roleId;
     private String name;
