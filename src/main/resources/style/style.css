@@ -1,0 +1,93 @@
+/* 1. Root Styling */
+/* I moved your gradient here for cleaner code.
+   Remove the inline style from StackPane in FXML for this to work best. */
+.root {
+    -fx-background-color: linear-gradient(to bottom right, #f8f9fa, #e05f89, #563d7c);
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+}
+
+/* 2. Form Container (The White Card) */
+/* Add styleClass="form-card" to your VBox in the FXML */
+.form-card {
+    -fx-background-color: rgba(255, 255, 255, 0.95); /* Slight transparency */
+    -fx-background-radius: 15;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 20, 0, 0, 10); /* Shadow for depth */
+    -fx-padding: 30;
+    -fx-border-color: white;
+    -fx-border-width: 1;
+    -fx-border-radius: 15;
+}
+
+/* 3. Title Styling */
+.label-title {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #563d7c; /* Matches the dark purple in your gradient */
+    -fx-padding: 0 0 20 0; /* Add space below title */
+    -fx-effect: dropshadow(gaussian, rgba(255,255,255,0.8), 2, 0, 0, 1);
+}
+
+/* 4. Field Labels (NIC, Name, etc.) */
+.label-field {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #555555;
+}
+
+/* 5. Input Fields (TextField and DatePicker) */
+.text-field, .date-picker .text-field {
+    -fx-background-color: #fdfdfd;
+    -fx-background-radius: 5;
+    -fx-border-color: #cccccc;
+    -fx-border-radius: 5;
+    -fx-padding: 5;
+    -fx-font-size: 13px;
+}
+
+/* Hover State for Inputs */
+.text-field:hover, .date-picker:hover .text-field {
+    -fx-border-color: #b0b0b0;
+}
+
+/* Focus State for Inputs (Glow effect) */
+.text-field:focused, .date-picker:focused .text-field {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #e05f89; /* Pink focus color */
+    -fx-effect: dropshadow(three-pass-box, rgba(224, 95, 137, 0.3), 5, 0, 0, 0);
+}
+
+/* 6. Buttons */
+.button {
+    -fx-cursor: hand;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 20; /* Pill shape */
+    -fx-padding: 8 25;
+}
+
+/* Register Button (Gradient Style) */
+.button-register {
+    -fx-background-color: linear-gradient(to right, #e05f89, #563d7c);
+    -fx-text-fill: white;
+}
+
+.button-register:hover {
+    -fx-background-color: linear-gradient(to right, #c24d73, #452e66); /* Slightly darker on hover */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5, 0, 0, 2);
+}
+
+.button-register:pressed {
+    -fx-background-color: #563d7c;
+}
+
+/* Back Button (Subtle Style) */
+.button-back {
+    -fx-background-color: #e9ecef;
+    -fx-text-fill: #495057;
+    -fx-border-color: #ced4da;
+    -fx-border-radius: 20;
+}
+
+.button-back:hover {
+    -fx-background-color: #dee2e6;
+}

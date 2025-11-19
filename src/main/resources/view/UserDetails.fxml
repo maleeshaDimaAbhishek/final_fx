@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="edu.MD.Fx_final.controller.UserDetailsController"
+            prefWidth="900" prefHeight="600"
+            style="-fx-background-color: linear-gradient(to bottom right, #f8f9fa, #e05f89, #563d7c)">
+
+    <!-- TOP BAR -->
+    <top>
+        <HBox spacing="10">
+            <padding>
+                <Insets top="15" right="15" bottom="15" left="15"/>
+            </padding>
+
+            <Label text="User Details" style="-fx-font-size: 26px; -fx-font-weight: bold;" />
+            <Pane HBox.hgrow="ALWAYS"/>
+            <TextField fx:id="txtSearch"
+                       promptText="Search by NIC, Name or Email"
+                       style="-fx-padding: 6;"/>
+            <Button text="Search"
+                    fx:id="btnSearch"
+                    onAction="#handleSearch"
+                    style="-fx-background-color: #007bff; -fx-text-fill: white;"/>
+        </HBox>
+    </top>
+
+    <!-- CENTER TABLE -->
+    <center>
+        <VBox spacing="10" >
+            <padding>
+                <Insets top="15" right="15" bottom="15" left="15"/>
+            </padding>
+
+            <TableView fx:id="tblUsers" VBox.vgrow="ALWAYS">
+
+                <columns>
+                    <TableColumn fx:id="colNIC" text="NIC" prefWidth="140"/>
+                    <TableColumn fx:id="colName" text="Name" prefWidth="150"/>
+                    <TableColumn fx:id="colDOB" text="DOB" prefWidth="120"/>
+                    <TableColumn fx:id="colEmail" text="Email" prefWidth="180"/>
+                    <TableColumn fx:id="colPhone" text="Phone Number" prefWidth="130"/>
+                    <TableColumn fx:id="colAddress" text="Address" prefWidth="180"/>
+                    <TableColumn fx:id="colRole" text="Role ID" prefWidth="80"/>
+                </columns>
+
+            </TableView>
+        </VBox>
+    </center>
+
+    <!-- BOTTOM BUTTONS -->
+    <bottom>
+        <HBox  spacing="15" alignment="CENTER">
+            <padding>
+                <Insets top="15" right="15" bottom="15" left="15"/>
+            </padding>
+
+            <Button text="Refresh"
+                    fx:id="btnRefresh"
+                    onAction="#handleRefresh"
+                    style="-fx-background-color: #17a2b8; -fx-text-fill: white;"/>
+
+            <Button text="Update"
+                    fx:id="btnUpdate"
+                    onAction="#handleUpdate"
+                    style="-fx-background-color: #ffc107; -fx-text-fill: black;"/>
+
+            <Button text="Delete"
+                    fx:id="btnDelete"
+                    onAction="#handleDelete"
+                    style="-fx-background-color: #dc3545; -fx-text-fill: white;"/>
+        </HBox>
+    </bottom>
+
+</BorderPane>

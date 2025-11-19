@@ -35,8 +35,8 @@
                 </VBox>
 
                 <Button fx:id="btnLogin" onAction="#btnGetOTP" styleClass="login-button" text="Login" />
-
-                <Label styleClass="forget-label" text="Didn't get the OTP? Resend" />
+                <Button fx:id="btnBack" onAction="#onActionBack" styleClass="back-button" text="Back" />
+                <Label styleClass="forget-label" onMouseClicked="#onActionDidnotgetOTP" text="Didn't get the OTP? Resend" />
 
                 <ImageView fx:id="bookImage" fitWidth="100" preserveRatio="true" />
             </VBox>

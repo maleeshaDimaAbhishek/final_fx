@@ -12,7 +12,7 @@ public class Starter extends Application {
     }
     public void start(Stage stage) throws Exception {
         loginFormReference=stage;
-        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/Login.fxml"))));
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/AdminDashBoard.fxml"))));
         stage.show();
     }
 }

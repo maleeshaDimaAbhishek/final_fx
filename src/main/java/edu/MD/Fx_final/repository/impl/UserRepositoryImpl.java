@@ -12,11 +12,6 @@ import java.sql.SQLException;
 public class UserRepositoryImpl implements UserRepository {
     Connection connection = DBConnection.getInstance().getConnection();
     @Override
-    public ResultSet getAllBookDetails() throws SQLException {
-        PreparedStatement preparedStatement = connection.prepareStatement("SELECT title,author,publisher,published_year,category,available_copies,book_image FROM BookDetails");
-        return preparedStatement.executeQuery();
-    }
-    @Override
     public boolean registerUser(UserRegistrationDTO userRegistrationDetails) throws SQLException {
         PreparedStatement preparedStatement=connection.prepareStatement("INSERT INTO user_details (NIC, name, dob, email, phone_number,address) VALUES (?, ?, ?, ?, ?,?);");
         preparedStatement.setObject(1,userRegistrationDetails.getNIC());

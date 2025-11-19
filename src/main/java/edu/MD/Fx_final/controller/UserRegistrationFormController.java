@@ -94,12 +94,14 @@ public class UserRegistrationFormController {
     }
     //send mail to customer
     public boolean sendMail(String Email,int OTP,String name){
-        return EmailUtil.sendEmail(
+        /*return EmailUtil.sendEmail(
                 Email,
                 "Welcome to Book Borrowing System 📚",
                 "Hello "+name+",\n\nYour Registration 0OTP is "+OTP+".\n\nThanks,\nTeam Library"
-        );
+        );*/
 
+        System.out.println(OTP);
+        return true;
     }
     //Email validation
     public static boolean isValidEmail(String email) {

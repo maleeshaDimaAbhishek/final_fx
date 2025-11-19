@@ -61,6 +61,7 @@ public class LoginController {
             otpLogin = new Stage();
             otpLogin.setScene(new Scene(root));
             otpLogin.show();
+            Starter.loginFormReference.hide();
             result = sendMail(userLoginDetails.getMail(), OTP, userLoginDetails.getName());
 
             if (!result) {
@@ -83,11 +84,12 @@ public class LoginController {
         }
     }
     public boolean sendMail(String Email,int OTP,String name){
-        return EmailUtil.sendEmail(
+        /*return EmailUtil.sendEmail(
                 Email,
                 "Welcome to Book Borrowing System 📚",
                 "Hello "+name+",\n\nYour OTP is "+OTP+".\n\nThanks,\nTeam Library"
-        );
+        );*/
+        return true;
     }
 
     public void onRegisterLabelClick(MouseEvent mouseEvent) throws IOException {

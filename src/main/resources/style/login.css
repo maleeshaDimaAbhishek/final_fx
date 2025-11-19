@@ -59,7 +59,23 @@
     -fx-background-radius: 20;
     -fx-cursor: hand;
 }
+.back-button {
+    -fx-background-color: linear-gradient(to right, #ff0077, #ff3300);
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-padding: 6 30;
+    -fx-background-radius: 20;
+    -fx-cursor: hand;
+}
 .login-button:hover {
+    -fx-background-color: linear-gradient(to right, #2575fc, #6a11cb);
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 8, 0, 0, 4);
+    -fx-opacity: 0.9;
+}
+.back-button:hover {
     -fx-background-color: linear-gradient(to right, #2575fc, #6a11cb);
     -fx-scale-x: 1.05;
     -fx-scale-y: 1.05;

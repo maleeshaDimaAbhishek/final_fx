@@ -34,7 +34,7 @@
         <!-- 🔹 Date of Birth -->
         <HBox spacing="10" alignment="CENTER_LEFT">
             <Label text="Date of Birth:" prefWidth="120" style="-fx-font-weight: bold;" />
-            <DatePicker fx:id="dpDOB" promptText="MM/DD/YYYY" prefWidth="220"/>
+            <DatePicker fx:id="dpDOB" prefWidth="220"/>
         </HBox>
 
         <!-- 🔹 Email -->
@@ -56,16 +56,14 @@
         </HBox>
 
         <!-- 🔹 Buttons -->
-        <HBox spacing="20" alignment="CENTER"  stylesheets="@../style/login.css" >
+        <HBox spacing="20" alignment="CENTER">
             <Button text="Register"
                     fx:id="btnRegister"
-                    styleClass="login-button"
                     onAction="#onRegisterClick"
                     style="-fx-background-color: #563d7c; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 10; -fx-padding: 8 20;" />
 
             <Button text="Back"
                     fx:id="btnBack"
-                    styleClass="login-button"
                     onAction="#onBackClick"
                     style="-fx-background-color: #e05f89; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 10; -fx-padding: 8 20;" />
         </HBox>

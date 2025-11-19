@@ -10,10 +10,10 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @ToString
 public class UserRegistrationDTO {
- private String NIC;
- private String name;
- private LocalDate dob;
- private String mail;
- private String phoneNumber;
- private String address;
+     private String NIC;
+     private String name;
+     private LocalDate dob;
+     private String mail;
+     private String phoneNumber;
+     private String address;
 }
