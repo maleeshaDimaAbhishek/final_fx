@@ -47,4 +47,14 @@ public class UserServiceImpl implements UserService {
             System.out.println(userDetailsDTO);
         }    return userDetailsDTOS;
     }
+
+    @Override
+    public int updateUser(UserDetailsDTO updatedUser) throws SQLException {
+        return userRepository.updateUser(updatedUser);
+    }
+
+    @Override
+    public int deleteUser(String nic) throws SQLException {
+        return userRepository.deleteUser(nic);
+    }
 }

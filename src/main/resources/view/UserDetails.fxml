@@ -17,8 +17,7 @@
             <Button fx:id="btnBack" text="← Back to Dashboard" onAction="#handleBack" style="-fx-background-color: #6c757d; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 8 16; -fx-cursor: hand;"/>
             <Label text="User Details Management" style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: white;"/>
             <Pane HBox.hgrow="ALWAYS"/>
-            <TextField fx:id="txtSearch" promptText="Search by NIC, Name or Email" prefWidth="250" style="-fx-padding: 8; -fx-font-size: 13px;"/>
-            <Button fx:id="btnSearch" text="Search" onAction="#handleSearch" style="-fx-background-color: #007bff; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 8 20; -fx-cursor: hand;"/>
+            <TextField fx:id="txtSearch" onAction="#handleSearch" promptText="Search by NIC, Name or Email" prefWidth="250" style="-fx-padding: 8; -fx-font-size: 13px;"/>
         </HBox>
     </top>
     <center>
@@ -55,8 +54,6 @@
                         <ColumnConstraints minWidth="120" prefWidth="120"/>
                         <ColumnConstraints hgrow="ALWAYS" minWidth="200"/>
                     </columnConstraints>
-                    <Label text="User ID:" GridPane.columnIndex="0" GridPane.rowIndex="0" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
-                    <TextField fx:id="txtUserId" promptText="Auto-generated" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="0" style="-fx-background-color: #e9ecef; -fx-padding: 8;"/>
                     <Label text="Name:" GridPane.columnIndex="2" GridPane.rowIndex="0" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
                     <TextField fx:id="txtName" promptText="Enter full name" GridPane.columnIndex="3" GridPane.rowIndex="0" style="-fx-padding: 8;"/>
                     <Label text="NIC:" GridPane.columnIndex="0" GridPane.rowIndex="1" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>

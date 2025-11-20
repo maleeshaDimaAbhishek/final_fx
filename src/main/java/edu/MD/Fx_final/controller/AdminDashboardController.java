@@ -23,7 +23,7 @@ public class AdminDashboardController {
             Parent root = loader.load();
 
             // 2. Create the stage and show it
-            Stage stage = new Stage();
+            stage = new Stage();
             stage.setScene(new Scene(root));
             stage.setTitle("User Details");
             stage.show();

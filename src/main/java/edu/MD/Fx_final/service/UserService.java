@@ -10,6 +10,8 @@ import java.util.List;
 public interface UserService {
     boolean UserRegistration(UserRegistrationDTO userRegistrationDetails) throws SQLException;
     UserLoginDTO checkUserRole(String userName) throws SQLException;
-
     List<UserDetailsDTO> getAllUserDetails() throws SQLException;
+    int updateUser(UserDetailsDTO updatedUser) throws SQLException;
+
+    int deleteUser(String nic) throws SQLException;
 }
