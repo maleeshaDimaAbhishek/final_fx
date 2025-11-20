@@ -8,4 +8,6 @@ import java.sql.SQLException;
 public interface UserRepository {
     boolean registerUser(UserRegistrationDTO userRegistrationDetails) throws SQLException;
     ResultSet getUserRole(String UserId) throws SQLException;
+
+    ResultSet getAllUserDetails() throws SQLException;
 }

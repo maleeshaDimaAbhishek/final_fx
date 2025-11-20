@@ -28,4 +28,10 @@ public class UserRepositoryImpl implements UserRepository {
         preparedStatement.setString(1, username);
         return preparedStatement.executeQuery();
     }
+
+    @Override
+    public ResultSet getAllUserDetails() throws SQLException {
+        PreparedStatement preparedStatement=connection.prepareStatement("SELECT NIC,name,dob,email,phone_number,address from user_details;");
+        return preparedStatement.executeQuery();
+    }
 }

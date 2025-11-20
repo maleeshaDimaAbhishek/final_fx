@@ -6,74 +6,77 @@
 
 <BorderPane xmlns="http://javafx.com/javafx/21"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="edu.MD.Fx_final.controller.UserDetailsController"
-            prefWidth="900" prefHeight="600"
+            fx:controller="edu.MD.Fx_final.controller.AdminUserDetailsController"
+            prefWidth="1200" prefHeight="700"
             style="-fx-background-color: linear-gradient(to bottom right, #f8f9fa, #e05f89, #563d7c)">
-
-    <!-- TOP BAR -->
     <top>
-        <HBox spacing="10">
+        <HBox spacing="15" alignment="CENTER_LEFT">
             <padding>
-                <Insets top="15" right="15" bottom="15" left="15"/>
+                <Insets top="20" right="20" bottom="20" left="20"/>
             </padding>
-
-            <Label text="User Details" style="-fx-font-size: 26px; -fx-font-weight: bold;" />
+            <Button fx:id="btnBack" text="← Back to Dashboard" onAction="#handleBack" style="-fx-background-color: #6c757d; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 8 16; -fx-cursor: hand;"/>
+            <Label text="User Details Management" style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: white;"/>
             <Pane HBox.hgrow="ALWAYS"/>
-            <TextField fx:id="txtSearch"
-                       promptText="Search by NIC, Name or Email"
-                       style="-fx-padding: 6;"/>
-            <Button text="Search"
-                    fx:id="btnSearch"
-                    onAction="#handleSearch"
-                    style="-fx-background-color: #007bff; -fx-text-fill: white;"/>
+            <TextField fx:id="txtSearch" promptText="Search by NIC, Name or Email" prefWidth="250" style="-fx-padding: 8; -fx-font-size: 13px;"/>
+            <Button fx:id="btnSearch" text="Search" onAction="#handleSearch" style="-fx-background-color: #007bff; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 8 20; -fx-cursor: hand;"/>
         </HBox>
     </top>
-
-    <!-- CENTER TABLE -->
     <center>
-        <VBox spacing="10" >
-            <padding>
-                <Insets top="15" right="15" bottom="15" left="15"/>
-            </padding>
-
-            <TableView fx:id="tblUsers" VBox.vgrow="ALWAYS">
-
-                <columns>
-                    <TableColumn fx:id="colNIC" text="NIC" prefWidth="140"/>
-                    <TableColumn fx:id="colName" text="Name" prefWidth="150"/>
-                    <TableColumn fx:id="colDOB" text="DOB" prefWidth="120"/>
-                    <TableColumn fx:id="colEmail" text="Email" prefWidth="180"/>
-                    <TableColumn fx:id="colPhone" text="Phone Number" prefWidth="130"/>
-                    <TableColumn fx:id="colAddress" text="Address" prefWidth="180"/>
-                    <TableColumn fx:id="colRole" text="Role ID" prefWidth="80"/>
-                </columns>
-
-            </TableView>
-        </VBox>
+        <SplitPane dividerPositions="0.6" orientation="VERTICAL">
+            <VBox spacing="10">
+                <padding>
+                    <Insets top="10" right="20" bottom="10" left="20"/>
+                </padding>
+                <Label text="All Users" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: white;"/>
+                <TableView fx:id="tblUsers" VBox.vgrow="ALWAYS" style="-fx-background-color: rgba(255, 255, 255, 0.95); -fx-background-radius: 8;">
+                    <columns>
+                        <TableColumn fx:id="colUserId" text="User ID" prefWidth="100"/>
+                        <TableColumn fx:id="colName" text="Name" prefWidth="180"/>
+                        <TableColumn fx:id="colNIC" text="NIC" prefWidth="130"/>
+                        <TableColumn fx:id="colEmail" text="Email" prefWidth="200"/>
+                        <TableColumn fx:id="colPhone" text="Phone Number" prefWidth="140"/>
+                        <TableColumn fx:id="colAddress" text="Address" prefWidth="220"/>
+                        <TableColumn fx:id="colDOB" text="Date of Birth" prefWidth="120"/>
+                    </columns>
+                    <placeholder>
+                        <Label text="No users available. Click Refresh to load data." style="-fx-font-size: 14px; -fx-text-fill: #666;"/>
+                    </placeholder>
+                </TableView>
+            </VBox>
+            <VBox spacing="15">
+                <padding>
+                    <Insets top="15" right="20" bottom="15" left="20"/>
+                </padding>
+                <Label text="User Details Form" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: white;"/>
+                <GridPane hgap="15" vgap="12" style="-fx-background-color: rgba(255, 255, 255, 0.9); -fx-background-radius: 8; -fx-padding: 20;">
+                    <columnConstraints>
+                        <ColumnConstraints minWidth="120" prefWidth="120"/>
+                        <ColumnConstraints hgrow="ALWAYS" minWidth="200"/>
+                        <ColumnConstraints minWidth="120" prefWidth="120"/>
+                        <ColumnConstraints hgrow="ALWAYS" minWidth="200"/>
+                    </columnConstraints>
+                    <Label text="User ID:" GridPane.columnIndex="0" GridPane.rowIndex="0" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
+                    <TextField fx:id="txtUserId" promptText="Auto-generated" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="0" style="-fx-background-color: #e9ecef; -fx-padding: 8;"/>
+                    <Label text="Name:" GridPane.columnIndex="2" GridPane.rowIndex="0" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
+                    <TextField fx:id="txtName" promptText="Enter full name" GridPane.columnIndex="3" GridPane.rowIndex="0" style="-fx-padding: 8;"/>
+                    <Label text="NIC:" GridPane.columnIndex="0" GridPane.rowIndex="1" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
+                    <TextField fx:id="txtNIC" promptText="Enter NIC number" GridPane.columnIndex="1" GridPane.rowIndex="1" style="-fx-padding: 8;"/>
+                    <Label text="Email:" GridPane.columnIndex="2" GridPane.rowIndex="1" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
+                    <TextField fx:id="txtEmail" promptText="Enter email address" GridPane.columnIndex="3" GridPane.rowIndex="1" style="-fx-padding: 8;"/>
+                    <Label text="Phone Number:" GridPane.columnIndex="0" GridPane.rowIndex="2" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
+                    <TextField fx:id="txtPhone" promptText="Enter phone number" GridPane.columnIndex="1" GridPane.rowIndex="2" style="-fx-padding: 8;"/>
+                    <Label text="Date of Birth:" GridPane.columnIndex="2" GridPane.rowIndex="2" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
+                    <DatePicker fx:id="dpDOB" promptText="Select date" GridPane.columnIndex="3" GridPane.rowIndex="2" maxWidth="Infinity" style="-fx-padding: 4;"/>
+                    <Label text="Address:" GridPane.columnIndex="0" GridPane.rowIndex="3" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
+                    <TextArea fx:id="txtAddress" promptText="Enter full address" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="3" prefRowCount="3" wrapText="true" style="-fx-padding: 8;"/>
+                </GridPane>
+                <HBox spacing="12" alignment="CENTER">
+                    <Button fx:id="btnRefresh" text="Refresh Table" onAction="#handleRefresh" style="-fx-background-color: #17a2b8; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10 24; -fx-cursor: hand;"/>
+                    <Button fx:id="btnUpdate" text="Update User" onAction="#handleUpdate" style="-fx-background-color: #ffc107; -fx-text-fill: black; -fx-font-size: 14px; -fx-padding: 10 24; -fx-cursor: hand; -fx-font-weight: bold;"/>
+                    <Button fx:id="btnDelete" text="Delete User" onAction="#handleDelete" style="-fx-background-color: #dc3545; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10 24; -fx-cursor: hand;"/>
+                    <Button fx:id="btnClear" text="Clear Form" onAction="#handleClear" style="-fx-background-color: #6c757d; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10 24; -fx-cursor: hand;"/>
+                </HBox>
+            </VBox>
+        </SplitPane>
     </center>
-
-    <!-- BOTTOM BUTTONS -->
-    <bottom>
-        <HBox  spacing="15" alignment="CENTER">
-            <padding>
-                <Insets top="15" right="15" bottom="15" left="15"/>
-            </padding>
-
-            <Button text="Refresh"
-                    fx:id="btnRefresh"
-                    onAction="#handleRefresh"
-                    style="-fx-background-color: #17a2b8; -fx-text-fill: white;"/>
-
-            <Button text="Update"
-                    fx:id="btnUpdate"
-                    onAction="#handleUpdate"
-                    style="-fx-background-color: #ffc107; -fx-text-fill: black;"/>
-
-            <Button text="Delete"
-                    fx:id="btnDelete"
-                    onAction="#handleDelete"
-                    style="-fx-background-color: #dc3545; -fx-text-fill: white;"/>
-        </HBox>
-    </bottom>
-
 </BorderPane>

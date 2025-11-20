@@ -1,6 +1,6 @@
 package edu.MD.Fx_final.service.impl;
 
-import edu.MD.Fx_final.model.dto.BookCardDTO;
+import edu.MD.Fx_final.model.dto.UserDetailsDTO;
 import edu.MD.Fx_final.model.dto.UserLoginDTO;
 import edu.MD.Fx_final.model.dto.UserRegistrationDTO;
 import edu.MD.Fx_final.repository.UserRepository;
@@ -28,5 +28,23 @@ public class UserServiceImpl implements UserService {
                     resultSet.getString("name"));
         }
         return null;
+    }
+
+    @Override
+    public List<UserDetailsDTO> getAllUserDetails() throws SQLException {
+        ResultSet  resultSet=userRepository.getAllUserDetails();
+        List<UserDetailsDTO> userDetailsDTOS=new ArrayList<>();
+        UserDetailsDTO userDetailsDTO;
+        while (resultSet.next()) {
+            userDetailsDTOS.add(userDetailsDTO=new UserDetailsDTO(
+                    resultSet.getString("NIC"),
+                    resultSet.getString("name"),
+                    resultSet.getDate("dob").toLocalDate(),
+                    resultSet.getString("email"),
+                    resultSet.getString("phone_number"),
+                    resultSet.getString("address")
+            ));
+            System.out.println(userDetailsDTO);
+        }    return userDetailsDTOS;
     }
 }
