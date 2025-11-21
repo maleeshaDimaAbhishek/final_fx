@@ -29,7 +29,7 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public ResultSet getAllUserDetails() throws SQLException {
-        PreparedStatement preparedStatement=connection.prepareStatement("SELECT NIC,name,dob,email,phone_number,address from user_details;");
+        PreparedStatement preparedStatement=connection.prepareStatement("SELECT NIC,name,dob,email,phone_number,address from user_details where role_id=10;");
         return preparedStatement.executeQuery();
     }
 
@@ -55,5 +55,26 @@ public class UserRepositoryImpl implements UserRepository {
         preparedStatement.setString(1, nic);
         return preparedStatement.executeUpdate();
         }
+
+    @Override
+    public int updateStaff(UserDetailsDTO updatedUser) throws SQLException {
+        String query = "UPDATE user_details SET name = ?, email = ?, phone_number = ?, address = ?, dob = ? WHERE nic = ?";
+
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+
+        preparedStatement.setString(1, updatedUser.getName());
+        preparedStatement.setString(2, updatedUser.getEmail());
+        preparedStatement.setString(3, updatedUser.getPhoneNumber());
+        preparedStatement.setString(4, updatedUser.getAddress());
+        preparedStatement.setDate(5, Date.valueOf(updatedUser.getDob()));
+        preparedStatement.setString(6, updatedUser.getNIC());
+        return preparedStatement.executeUpdate();
     }
+
+    @Override
+    public ResultSet getAllStaffDetails() throws SQLException {
+        PreparedStatement preparedStatement=connection.prepareStatement("SELECT NIC,name,dob,email,phone_number,address from user_details where role_id=10;");
+        return preparedStatement.executeQuery();
+    }
+}
 

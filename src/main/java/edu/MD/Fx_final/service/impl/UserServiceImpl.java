@@ -57,4 +57,27 @@ public class UserServiceImpl implements UserService {
     public int deleteUser(String nic) throws SQLException {
         return userRepository.deleteUser(nic);
     }
+
+    @Override
+    public int updateStaff(UserDetailsDTO updatedUser) throws SQLException {
+        return userRepository.updateStaff(updatedUser);
+    }
+
+    @Override
+    public List<UserDetailsDTO> getAllStaffDetails() throws SQLException {
+        ResultSet  resultSet=userRepository.getAllStaffDetails();
+        List<UserDetailsDTO> userDetailsDTOS=new ArrayList<>();
+        UserDetailsDTO userDetailsDTO;
+        while (resultSet.next()) {
+            userDetailsDTOS.add(userDetailsDTO=new UserDetailsDTO(
+                    resultSet.getString("NIC"),
+                    resultSet.getString("name"),
+                    resultSet.getDate("dob").toLocalDate(),
+                    resultSet.getString("email"),
+                    resultSet.getString("phone_number"),
+                    resultSet.getString("address")
+            ));
+            System.out.println(userDetailsDTO);
+        }    return userDetailsDTOS;
+    }
 }

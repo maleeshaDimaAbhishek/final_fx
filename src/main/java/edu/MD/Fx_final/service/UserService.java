@@ -12,6 +12,8 @@ public interface UserService {
     UserLoginDTO checkUserRole(String userName) throws SQLException;
     List<UserDetailsDTO> getAllUserDetails() throws SQLException;
     int updateUser(UserDetailsDTO updatedUser) throws SQLException;
-
     int deleteUser(String nic) throws SQLException;
+    int updateStaff(UserDetailsDTO updatedUser) throws SQLException;
+
+    List<UserDetailsDTO> getAllStaffDetails() throws SQLException;
 }
