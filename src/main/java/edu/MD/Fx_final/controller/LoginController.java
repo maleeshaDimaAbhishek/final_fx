@@ -1,11 +1,7 @@
 
 package edu.MD.Fx_final.controller;
 
-import java.io.IOException;
-import java.sql.SQLException;
-
 import edu.MD.Fx_final.Starter;
-import edu.MD.Fx_final.Utill.EmailUtil;
 import edu.MD.Fx_final.model.dto.UserLoginDTO;
 import edu.MD.Fx_final.service.UserService;
 import edu.MD.Fx_final.service.impl.UserServiceImpl;
@@ -22,6 +18,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import javax.swing.*;
+import java.io.IOException;
+import java.sql.SQLException;
 
 public class LoginController {
     UserService userService = new UserServiceImpl();
@@ -56,8 +54,9 @@ public class LoginController {
         if (userLoginDetails != null) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/OTPLogin.fxml"));
             Parent root = loader.load();
-            OTPLoginController otpController = loader.getController();
-            otpController.setOTP(OTP);
+            otpLoginController = loader.getController();
+            otpLoginController.setOTP(OTP);
+            otpLoginController.setRoleId(userLoginDetails.getRoleId());
             otpLogin = new Stage();
             otpLogin.setScene(new Scene(root));
             otpLogin.show();

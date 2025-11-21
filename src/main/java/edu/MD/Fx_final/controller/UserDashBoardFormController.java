@@ -1,5 +1,6 @@
 package edu.MD.Fx_final.controller;
 
+import edu.MD.Fx_final.Starter;
 import edu.MD.Fx_final.model.dto.BookCardDTO;
 import edu.MD.Fx_final.service.BookService;
 import edu.MD.Fx_final.service.UserService;
@@ -18,7 +19,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDashBoardFormController {
-    UserService userService=new UserServiceImpl();
     BookService bookService=new BookServiceImpl();
     List<BookCardDTO> bookCardDetailsList=new ArrayList<>();
     @FXML
@@ -93,7 +93,12 @@ public class UserDashBoardFormController {
 
     // 🔹 Top navigation events
     @FXML private void onPaymentClick() { System.out.println("Payment Clicked"); }
-    @FXML private void onReturnClick() { System.out.println("Return Book Clicked"); }
+    @FXML private void onReturnClick() {
+
+    }
     @FXML private void onBorrowClick() { System.out.println("Borrow Book Clicked"); }
-    @FXML private void onLogoutClick() { System.out.println("Logout Clicked"); }
+    @FXML private void onLogoutClick() {
+        Starter.loginFormReference.show();
+        OTPLoginController.userDashBoard.hide();
+    }
 }

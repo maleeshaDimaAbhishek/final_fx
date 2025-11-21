@@ -19,4 +19,6 @@ public interface UserRepository {
     int updateStaff(UserDetailsDTO updatedUser) throws SQLException;
 
     ResultSet getAllStaffDetails() throws SQLException;
+
+    int deleteSStaff(String nic) throws SQLException;
 }

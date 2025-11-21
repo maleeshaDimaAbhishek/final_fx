@@ -16,4 +16,6 @@ public interface UserService {
     int updateStaff(UserDetailsDTO updatedUser) throws SQLException;
 
     List<UserDetailsDTO> getAllStaffDetails() throws SQLException;
+
+    int deleteStaff(String nic) throws SQLException;
 }

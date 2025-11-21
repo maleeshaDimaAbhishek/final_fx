@@ -73,8 +73,16 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public ResultSet getAllStaffDetails() throws SQLException {
-        PreparedStatement preparedStatement=connection.prepareStatement("SELECT NIC,name,dob,email,phone_number,address from user_details where role_id=10;");
+        PreparedStatement preparedStatement=connection.prepareStatement("SELECT NIC,name,dob,email,phone_number,address from user_details where role_id=12;");
         return preparedStatement.executeQuery();
+    }
+
+    @Override
+    public int deleteSStaff(String nic) throws SQLException {
+        String query = "DELETE FROM user_details WHERE nic = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setString(1, nic);
+        return preparedStatement.executeUpdate();
     }
 }
 

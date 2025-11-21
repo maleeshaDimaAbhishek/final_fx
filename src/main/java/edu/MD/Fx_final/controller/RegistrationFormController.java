@@ -1,7 +1,6 @@
 package edu.MD.Fx_final.controller;
 
 import edu.MD.Fx_final.Starter;
-import edu.MD.Fx_final.Utill.EmailUtil;
 import edu.MD.Fx_final.model.dto.UserRegistrationDTO;
 import edu.MD.Fx_final.service.UserService;
 import edu.MD.Fx_final.service.impl.UserServiceImpl;
@@ -18,7 +17,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Random;
 
-public class UserRegistrationFormController {
+public class RegistrationFormController {
     UserService userService=new UserServiceImpl();
     int registrationOtp=0;
     public static Stage OTPDialogBox=new Stage();

@@ -6,7 +6,7 @@
 <?import javafx.scene.text.*?>
 
 <AnchorPane xmlns:fx="http://javafx.com/fxml"
-            fx:controller="edu.MD.Fx_final.controller.UserRegistrationFormController"
+            fx:controller="edu.MD.Fx_final.controller.RegistrationFormController"
             prefWidth="600" prefHeight="500"
             style="-fx-background-color: linear-gradient(to bottom right, #f8f9fa, #e05f89, #563d7c);">
 

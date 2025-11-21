@@ -33,7 +33,7 @@ public class OTPDialogController {
     }
 
     public void onCancelClick(ActionEvent actionEvent) {
-        UserRegistrationFormController.OTPDialogBox.hide();
+        RegistrationFormController.OTPDialogBox.hide();
         LoginController.userRegistration.show();
     }
 }

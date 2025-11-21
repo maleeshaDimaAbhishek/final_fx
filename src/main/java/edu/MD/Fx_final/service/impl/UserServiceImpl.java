@@ -80,4 +80,9 @@ public class UserServiceImpl implements UserService {
             System.out.println(userDetailsDTO);
         }    return userDetailsDTOS;
     }
+
+    @Override
+    public int deleteStaff(String nic) throws SQLException {
+        return userRepository.deleteSStaff(nic);
+    }
 }

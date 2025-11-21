@@ -278,7 +278,6 @@ public class AdminStaffDetailsController {
     //clear all fields
     @FXML
     public void handleClear(ActionEvent actionEvent) {
-        txtUserId.clear();
         txtName.clear();
         txtNIC.clear();
         txtEmail.clear();
@@ -379,9 +378,7 @@ public class AdminStaffDetailsController {
         return true;
     }
 
-    /**
-     * Show alert dialog
-     */
+
     private void showAlert(Alert.AlertType type, String title, String content) {
         Alert alert = new Alert(type);
         alert.setTitle(title);
