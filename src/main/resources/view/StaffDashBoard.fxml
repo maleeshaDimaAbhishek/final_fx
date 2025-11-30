@@ -5,26 +5,24 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" styleClass="root" stylesheets="@../style/AdminDashBoard.css"
-            fx:controller="edu.MD.Fx_final.controller.AdminDashboardController"
-            style="-fx-background-color: linear-gradient(to bottom right, #f8f9fa, #e05f89, #563d7c);">
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.MD.Fx_final.controller.StaffDashboardController" styleClass="root" stylesheets="@../style/staff-styles.css">
     <top>
         <HBox styleClass="top-bar" spacing="15" alignment="CENTER_LEFT">
             <padding>
                 <Insets top="20" right="30" bottom="20" left="30"/>
             </padding>
-            <Label text="Book Warm.lk - Admin Dashboard" styleClass="header-title">
+            <Label text="Book Worm.lk- Staff DashBoard " styleClass="header-title">
                 <font>
                     <Font name="Poppins SemiBold" size="24"/>
                 </font>
             </Label>
             <Region HBox.hgrow="ALWAYS"/>
-            <Label fx:id="adminNameLabel" text="Admin: John Doe" styleClass="admin-name">
+            <Label fx:id="staffNameLabel" text="Staff: John Doe" styleClass="staff-name">
                 <font>
                     <Font name="Poppins Regular" size="14"/>
                 </font>
             </Label>
-            <Button fx:id="logoutButton" onAction="#handleLogoutAction" text="Logout" styleClass="logout-btn">
+            <Button fx:id="logoutButton" text="Logout" styleClass="logout-btn">
                 <font>
                     <Font name="Poppins Medium" size="12"/>
                 </font>
@@ -36,7 +34,7 @@
             <padding>
                 <Insets top="20" right="10" bottom="20" left="10"/>
             </padding>
-            <Label text="NAVIGATION" styleClass="sidebar-header">
+            <Label text="VIEW SECTIONS" styleClass="sidebar-header">
                 <font>
                     <Font name="Poppins SemiBold" size="12"/>
                 </font>
@@ -44,27 +42,22 @@
                     <Insets bottom="10"/>
                 </VBox.margin>
             </Label>
-            <Button fx:id="viewUsersBtn" onAction="#handleViewUserOnAction" text="View Users"  styleClass="nav-btn" maxWidth="Infinity">
+            <Button fx:id="viewUsersBtn" text="View Users" styleClass="nav-btn" maxWidth="Infinity">
                 <font>
                     <Font name="Poppins Regular" size="14"/>
                 </font>
             </Button>
-            <Button fx:id="viewStaffBtn" onAction="#handleViewStaffAction" text="View Staff" styleClass="nav-btn" maxWidth="Infinity">
+            <Button fx:id="viewPaymentsBtn" text="View Payments" styleClass="nav-btn" maxWidth="Infinity">
                 <font>
                     <Font name="Poppins Regular" size="14"/>
                 </font>
             </Button>
-            <Button fx:id="viewPaymentsBtn" onAction="#handleViewPaymentOnAction" text="View Payments" styleClass="nav-btn" maxWidth="Infinity">
+            <Button fx:id="viewBorrowingsBtn" text="Book Borrowings" styleClass="nav-btn" maxWidth="Infinity">
                 <font>
                     <Font name="Poppins Regular" size="14"/>
                 </font>
             </Button>
-            <Button fx:id="viewBorrowingsBtn" onAction="#handleViewBorrowingsOnAction" text="Book Borrowings" styleClass="nav-btn" maxWidth="Infinity">
-                <font>
-                    <Font name="Poppins Regular" size="14"/>
-                </font>
-            </Button>
-            <Button fx:id="viewBooksBtn" onAction="#handleViewBooksOnAction" text="View Books" styleClass="nav-btn" maxWidth="Infinity">
+            <Button fx:id="viewBooksBtn" text="View Books" styleClass="nav-btn" maxWidth="Infinity">
                 <font>
                     <Font name="Poppins Regular" size="14"/>
                 </font>
@@ -82,22 +75,12 @@
                     <Insets bottom="10"/>
                 </VBox.margin>
             </Label>
-            <Button fx:id="registerStaffBtn" onAction="#handleRegisterStaffOnAction" text="Register Staff" styleClass="action-btn" maxWidth="Infinity">
+            <Button fx:id="registerUserBtn" text="Register User" styleClass="action-btn" maxWidth="Infinity">
                 <font>
                     <Font name="Poppins Medium" size="14"/>
                 </font>
             </Button>
-            <Button fx:id="manageUsersBtn" onAction="#handleManageUserOnAction" text="Manage Users" styleClass="action-btn" maxWidth="Infinity">
-                <font>
-                    <Font name="Poppins Medium" size="14"/>
-                </font>
-            </Button>
-            <Button fx:id="manageStaffBtn" onAction="#handleManageStaffOnAction" text="Manage Staff" styleClass="action-btn" maxWidth="Infinity">
-                <font>
-                    <Font name="Poppins Medium" size="14"/>
-                </font>
-            </Button>
-            <Button fx:id="manageBooksBtn" onAction="#handleManageBooksOnAction" text="Manage Books" styleClass="action-btn" maxWidth="Infinity">
+            <Button fx:id="manageBooksBtn" text="Manage Books" styleClass="action-btn" maxWidth="Infinity">
                 <font>
                     <Font name="Poppins Medium" size="14"/>
                 </font>
@@ -141,21 +124,6 @@
                         <padding>
                             <Insets top="20" right="20" bottom="20" left="20"/>
                         </padding>
-                        <Label text="Total Staff" styleClass="stat-label">
-                            <font>
-                                <Font name="Poppins Regular" size="14"/>
-                            </font>
-                        </Label>
-                        <Label fx:id="totalStaffLabel" text="0" styleClass="stat-value">
-                            <font>
-                                <Font name="Poppins Bold" size="32"/>
-                            </font>
-                        </Label>
-                    </VBox>
-                    <VBox styleClass="stat-card" spacing="10" GridPane.columnIndex="2">
-                        <padding>
-                            <Insets top="20" right="20" bottom="20" left="20"/>
-                        </padding>
                         <Label text="Total Books" styleClass="stat-label">
                             <font>
                                 <Font name="Poppins Regular" size="14"/>
@@ -167,7 +135,7 @@
                             </font>
                         </Label>
                     </VBox>
-                    <VBox styleClass="stat-card" spacing="10" GridPane.columnIndex="3">
+                    <VBox styleClass="stat-card" spacing="10" GridPane.columnIndex="2">
                         <padding>
                             <Insets top="20" right="20" bottom="20" left="20"/>
                         </padding>
@@ -177,6 +145,21 @@
                             </font>
                         </Label>
                         <Label fx:id="activeBorrowingsLabel" text="0" styleClass="stat-value">
+                            <font>
+                                <Font name="Poppins Bold" size="32"/>
+                            </font>
+                        </Label>
+                    </VBox>
+                    <VBox styleClass="stat-card" spacing="10" GridPane.columnIndex="3">
+                        <padding>
+                            <Insets top="20" right="20" bottom="20" left="20"/>
+                        </padding>
+                        <Label text="Available Books" styleClass="stat-label">
+                            <font>
+                                <Font name="Poppins Regular" size="14"/>
+                            </font>
+                        </Label>
+                        <Label fx:id="availableBooksLabel" text="0" styleClass="stat-value">
                             <font>
                                 <Font name="Poppins Bold" size="32"/>
                             </font>
@@ -201,7 +184,7 @@
             </VBox>
             <VBox fx:id="usersView" spacing="15" visible="false" managed="false">
                 <HBox alignment="CENTER_LEFT" spacing="15">
-                    <Label text="User Management" styleClass="content-title">
+                    <Label text="User Details" styleClass="content-title">
                         <font>
                             <Font name="Poppins Bold" size="28"/>
                         </font>
@@ -216,62 +199,14 @@
                 <TableView fx:id="usersTable" styleClass="data-table" VBox.vgrow="ALWAYS">
                     <columns>
                         <TableColumn text="User ID" prefWidth="100" fx:id="userIdCol"/>
-                        <TableColumn text="Name" prefWidth="200" fx:id="userNameCol"/>
-                        <TableColumn text="Email" prefWidth="250" fx:id="userEmailCol"/>
-                        <TableColumn text="Phone" prefWidth="150" fx:id="userPhoneCol"/>
-                        <TableColumn text="Join Date" prefWidth="150" fx:id="userJoinDateCol"/>
-                        <TableColumn text="Status" prefWidth="100" fx:id="userStatusCol"/>
+                        <TableColumn text="Name" prefWidth="180" fx:id="userNameCol"/>
+                        <TableColumn text="NIC" prefWidth="120" fx:id="userNicCol"/>
+                        <TableColumn text="Email" prefWidth="200" fx:id="userEmailCol"/>
+                        <TableColumn text="Phone" prefWidth="130" fx:id="userPhoneCol"/>
+                        <TableColumn text="Address" prefWidth="200" fx:id="userAddressCol"/>
+                        <TableColumn text="DOB" prefWidth="120" fx:id="userDobCol"/>
                     </columns>
                 </TableView>
-                <HBox spacing="10" alignment="CENTER_RIGHT">
-                    <Button fx:id="updateUserBtn" text="Update User" styleClass="primary-btn">
-                        <font>
-                            <Font name="Poppins Medium" size="13"/>
-                        </font>
-                    </Button>
-                    <Button fx:id="deleteUserBtn" text="Delete User" styleClass="danger-btn">
-                        <font>
-                            <Font name="Poppins Medium" size="13"/>
-                        </font>
-                    </Button>
-                </HBox>
-            </VBox>
-            <VBox fx:id="staffView" spacing="15" visible="false" managed="false">
-                <HBox alignment="CENTER_LEFT" spacing="15">
-                    <Label text="Staff Management" styleClass="content-title">
-                        <font>
-                            <Font name="Poppins Bold" size="28"/>
-                        </font>
-                    </Label>
-                    <Region HBox.hgrow="ALWAYS"/>
-                    <TextField fx:id="searchStaffField" promptText="Search staff..." styleClass="search-field" prefWidth="250">
-                        <font>
-                            <Font name="Poppins Regular" size="13"/>
-                        </font>
-                    </TextField>
-                </HBox>
-                <TableView fx:id="staffTable" styleClass="data-table" VBox.vgrow="ALWAYS">
-                    <columns>
-                        <TableColumn text="Staff ID" prefWidth="100" fx:id="staffIdCol"/>
-                        <TableColumn text="Name" prefWidth="200" fx:id="staffNameCol"/>
-                        <TableColumn text="Email" prefWidth="250" fx:id="staffEmailCol"/>
-                        <TableColumn text="Phone" prefWidth="150" fx:id="staffPhoneCol"/>
-                        <TableColumn text="Role" prefWidth="150" fx:id="staffRoleCol"/>
-                        <TableColumn text="Join Date" prefWidth="150" fx:id="staffJoinDateCol"/>
-                    </columns>
-                </TableView>
-                <HBox spacing="10" alignment="CENTER_RIGHT">
-                    <Button fx:id="updateStaffBtn" text="Update Staff" styleClass="primary-btn">
-                        <font>
-                            <Font name="Poppins Medium" size="13"/>
-                        </font>
-                    </Button>
-                    <Button fx:id="deleteStaffBtn" text="Delete Staff" styleClass="danger-btn">
-                        <font>
-                            <Font name="Poppins Medium" size="13"/>
-                        </font>
-                    </Button>
-                </HBox>
             </VBox>
             <VBox fx:id="paymentsView" spacing="15" visible="false" managed="false">
                 <HBox alignment="CENTER_LEFT" spacing="15">
@@ -290,7 +225,7 @@
                 <TableView fx:id="paymentsTable" styleClass="data-table" VBox.vgrow="ALWAYS">
                     <columns>
                         <TableColumn text="Payment ID" prefWidth="120" fx:id="paymentIdCol"/>
-                        <TableColumn text="User Name" prefWidth="200" fx:id="paymentUserCol"/>
+                        <TableColumn text="User Name" prefWidth="180" fx:id="paymentUserCol"/>
                         <TableColumn text="Amount" prefWidth="120" fx:id="paymentAmountCol"/>
                         <TableColumn text="Type" prefWidth="150" fx:id="paymentTypeCol"/>
                         <TableColumn text="Date" prefWidth="150" fx:id="paymentDateCol"/>

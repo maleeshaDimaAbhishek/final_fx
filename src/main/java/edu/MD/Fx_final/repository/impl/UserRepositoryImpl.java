@@ -11,13 +11,14 @@ public class UserRepositoryImpl implements UserRepository {
     Connection connection = DBConnection.getInstance().getConnection();
     @Override
     public boolean registerUser(UserRegistrationDTO userRegistrationDetails) throws SQLException {
-        PreparedStatement preparedStatement=connection.prepareStatement("INSERT INTO user_details (NIC, name, dob, email, phone_number,address) VALUES (?, ?, ?, ?, ?,?);");
+        PreparedStatement preparedStatement=connection.prepareStatement("INSERT INTO user_details (NIC, name, dob, email, phone_number,address,role_id) VALUES (?, ?, ?, ?, ?,?,?);");
         preparedStatement.setObject(1,userRegistrationDetails.getNIC());
         preparedStatement.setObject(2,userRegistrationDetails.getName());
         preparedStatement.setObject(3,userRegistrationDetails.getDob());
         preparedStatement.setObject(4,userRegistrationDetails.getMail());
         preparedStatement.setObject(5,userRegistrationDetails.getPhoneNumber());
         preparedStatement.setObject(6,userRegistrationDetails.getAddress());
+        preparedStatement.setObject(7,userRegistrationDetails.getRoleId());
         return preparedStatement.executeUpdate()>0;
     }
     @Override

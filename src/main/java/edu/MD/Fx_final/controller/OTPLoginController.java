@@ -26,6 +26,7 @@ public class OTPLoginController {
     int roleId;
     public static Stage userDashBoard=new Stage();
     public static Stage adminDashBoard=new Stage();
+    public static Stage staffDashBoard=new Stage();
     @FXML
     private ImageView bookImage;
 
@@ -67,11 +68,12 @@ public class OTPLoginController {
                 if(roleId==10){
                     userDashBoard.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/UserDashBoardForm.fxml"))));
                     userDashBoard.show();
-                }else if(roleId==12){
+                }else if(roleId==11){
                     adminDashBoard.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/AdminDashBoard.fxml"))));
                     adminDashBoard.show();
                 }else{
-                    System.out.println("error");
+                    staffDashBoard.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/StaffDashBoard.fxml"))));
+                    staffDashBoard.show();
                 }
             }else {
                 txtOtp.setText("");

@@ -9,7 +9,6 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 public class UserDetailsDTO {
     private String NIC;
     private String name;

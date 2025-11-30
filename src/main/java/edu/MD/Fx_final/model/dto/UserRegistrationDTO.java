@@ -16,4 +16,5 @@ public class UserRegistrationDTO {
      private String mail;
      private String phoneNumber;
      private String address;
+     private int roleId;
 }

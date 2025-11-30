@@ -11,23 +11,23 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class AdminDashboardController {
-    AdminUserDetailsController userDetailsController=new AdminUserDetailsController();
-    public static Stage cUserstage;
+    public static Stage cUserstage=new Stage();
 
     public void handleLogoutAction(ActionEvent actionEvent) {
-        OTPLoginController.adminDashBoard.hide();
+        OTPLoginController.adminDashBoard.close();
+        System.out.println("adminDash");
         Starter.loginFormReference.show();
     }
 
     @FXML
     public void handleViewUserOnAction(ActionEvent event) {
         try {
+            OTPLoginController.adminDashBoard.hide();
             // 1. Load the FXML file (This links the FXML to the Controller)
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/UserDetails.fxml"));
             Parent root = loader.load();
 
             // 2. Create the cUserstage and show it
-            cUserstage = new Stage();
             cUserstage.setScene(new Scene(root));
             cUserstage.setTitle("User Details");
             cUserstage.show();

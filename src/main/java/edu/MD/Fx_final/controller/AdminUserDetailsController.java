@@ -297,20 +297,9 @@ public class AdminUserDetailsController {
      */
     @FXML
     public void handleBack(ActionEvent actionEvent) {
-        try {
-            // Load the admin dashboard
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/AdminDashBoard.fxml"));
-            Parent root = loader.load();
-
-            Stage stage = (Stage) btnBack.getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.setTitle("Admin Dashboard");
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-            showAlert(Alert.AlertType.ERROR, "Navigation Error",
-                    "Failed to return to dashboard: " + e.getMessage());
-        }
+        AdminDashboardController.cUserstage.hide();
+        // Load the admin dashboard
+        OTPLoginController.adminDashBoard.show();
     }
 
     /**
