@@ -1,51 +1,92 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Priority?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml"
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="edu.MD.Fx_final.controller.UserDashBoardFormController"
-            prefWidth="900" prefHeight="600"
-            style="-fx-background-color: linear-gradient(to bottom right, #f8f9fa, #e05f89, #563d7c);">
+            stylesheets="@../style/user-dashboard.css"
+            styleClass="user-root">
 
-    <!-- 🔹 Top Navigation Bar -->
     <top>
-        <HBox spacing="30" alignment="CENTER_LEFT"
-              style="-fx-padding: 15; -fx-background-color: rgba(255,255,255,0.3); -fx-background-radius: 20;">
+        <VBox spacing="12" styleClass="top-shell">
+            <padding>
+                <Insets top="16" right="20" bottom="16" left="20"/>
+            </padding>
 
-            <!-- 🔹 Left Logo/Title -->
-            <Label text="BookWorm.lk"
-                   style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: black;" />
+            <HBox alignment="CENTER_LEFT" spacing="12">
+                <VBox spacing="2">
+                    <Label text="BookWorm.lk" styleClass="brand-title">
+                        <font>
+                            <Font name="Poppins SemiBold" size="24"/>
+                        </font>
+                    </Label>
+                    <Label text="Discover, order, and track your books" styleClass="brand-subtitle"/>
+                </VBox>
 
-            <!-- 🔹 Spacer to push items to right -->
-            <Region HBox.hgrow="ALWAYS" />
+                <Region HBox.hgrow="ALWAYS"/>
 
-            <!-- 🔹 Right Menu Items -->
-            <HBox spacing="30" alignment="CENTER_RIGHT">
-                <Label text="Payment" onMouseClicked="#onPaymentClick" style="-fx-font-weight: bold; -fx-cursor: hand;" />
-                <Label text="Order Book" onMouseClicked="#onBorrowClick" style="-fx-font-weight: bold; -fx-cursor: hand;" />
-                <Label text="Logout" onMouseClicked="#onLogoutClick" style="-fx-font-weight: bold; -fx-cursor: hand;" />
+                <Button text="Payment" styleClass="ghost-btn" onAction="#onPaymentClick"/>
+                <Button text="My Orders" styleClass="ghost-btn" onAction="#onBorrowClick"/>
+                <Button text="Logout" styleClass="danger-btn" onAction="#onLogoutClick"/>
             </HBox>
-        </HBox>
+
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <TextField fx:id="txtSearch"
+                           promptText="Search by title, author, category"
+                           styleClass="search-field"
+                           HBox.hgrow="ALWAYS"/>
+                <Button text="Search" styleClass="primary-btn" onAction="#handleSearchBooks"/>
+                <Button text="Clear" styleClass="ghost-btn" onAction="#handleClearSearch"/>
+            </HBox>
+        </VBox>
     </top>
 
-
-    <!-- 🔹 Center Book Grid -->
     <center>
-        <ScrollPane fitToWidth="true" fitToHeight="true"
-                    style="-fx-background-color: transparent;">
-            <FlowPane fx:id="bookContainer"
-                      alignment="CENTER"
-                      hgap="20" vgap="20"
-                      prefWrapLength="800"
-                      style="-fx-background-color: transparent;">
-                <padding>
-                    <Insets top="20" right="20" bottom="20" left="20"/>
-                </padding>
-                <!-- Books will be dynamically added here -->
-            </FlowPane>
-        </ScrollPane>
+        <HBox spacing="14">
+            <padding>
+                <Insets top="14" right="18" bottom="18" left="18"/>
+            </padding>
+
+            <VBox spacing="12" styleClass="left-panel" prefWidth="280">
+                <Label text="Inventory Snapshot" styleClass="panel-title"/>
+                <VBox styleClass="metric-card" spacing="5">
+                    <Label text="Total Titles" styleClass="metric-label"/>
+                    <Label fx:id="totalTitlesLabel" text="0" styleClass="metric-value"/>
+                </VBox>
+                <VBox styleClass="metric-card" spacing="5">
+                    <Label text="Available Copies" styleClass="metric-label"/>
+                    <Label fx:id="availableCopiesLabel" text="0" styleClass="metric-value"/>
+                </VBox>
+
+                <Label text="Order History" styleClass="panel-title"/>
+                <ListView fx:id="orderHistoryList" VBox.vgrow="ALWAYS" styleClass="order-list"/>
+                <Button text="Delete Selected Order" styleClass="danger-btn" onAction="#handleDeleteSelectedOrder"/>
+                <Label text="Allowed only within 30 minutes of order time." styleClass="helper-label"/>
+            </VBox>
+
+            <ScrollPane fitToWidth="true" fitToHeight="true" HBox.hgrow="ALWAYS" styleClass="books-scroll">
+                <FlowPane fx:id="bookContainer"
+                          alignment="TOP_LEFT"
+                          hgap="16"
+                          vgap="16"
+                          prefWrapLength="900">
+                    <padding>
+                        <Insets top="8" right="8" bottom="8" left="8"/>
+                    </padding>
+                </FlowPane>
+            </ScrollPane>
+        </HBox>
     </center>
 </BorderPane>

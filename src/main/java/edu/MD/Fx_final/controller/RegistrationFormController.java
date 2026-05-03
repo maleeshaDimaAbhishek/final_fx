@@ -1,6 +1,7 @@
 package edu.MD.Fx_final.controller;
 
 import edu.MD.Fx_final.Starter;
+import edu.MD.Fx_final.Utill.EmailUtil;
 import edu.MD.Fx_final.model.dto.UserRegistrationDTO;
 import edu.MD.Fx_final.service.UserService;
 import edu.MD.Fx_final.service.impl.UserServiceImpl;
@@ -15,12 +16,12 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class RegistrationFormController {
-    UserService userService=new UserServiceImpl();
-    int registrationOtp=0;
-    public static Stage OTPDialogBox=new Stage();
+    private final UserService userService = new UserServiceImpl();
+    private int registrationOtp = 0;
+    public static final Stage OTPDialogBox = new Stage();
 
     @FXML
     private TextField txtNIC;
@@ -35,114 +36,109 @@ public class RegistrationFormController {
     @FXML
     private DatePicker dpDOB;
 
-    String userMail;
-    String userName;
-    private ActionEvent actionEvent1;
+    private String userMail;
+    private String userName;
 
+    @FXML
     public void onRegisterClick(ActionEvent actionEvent) throws IOException {
-        if(validateFields()){
-            userMail=txtEmail.getText();
-            userName=txtName.getText();
-            if (isValidEmail(userMail)){
-                registrationOtp=generateOTP();
-                if(sendMail(userMail,registrationOtp,userName)){
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/OTPDialogBox.fxml"));
-                    Scene scene = new Scene(loader.load());
-                    OTPDialogController controller = loader.getController();
-                    controller.setOtp(registrationOtp);
-                    controller.setOnSuccess(() -> {
-                        try {
-                            registerUser();
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    });
-                    LoginController.userRegistration.hide();
-                    OTPDialogBox.setScene(scene);
-                    OTPDialogBox.show();
-
-                }else {
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Invalid Email or Connection Error");
-                    alert.setHeaderText(null);
-                    alert.setContentText("Please Check Your Internet Connection or Mail.");
-                    alert.show();
-                    txtEmail.setText("");
-                }
-            }else{
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Invalid Email");
-                alert.setHeaderText(null);
-                alert.setContentText("Please Enter Valid Email");
-                alert.show();
-            }
-        }else{
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Empty Filed Detected");
-            alert.setHeaderText(null);
-            alert.setContentText("Please Fill All The Field");
-            alert.show();
+        if (!validateFields()) {
+            showAlert(Alert.AlertType.ERROR, "Empty Fields Detected", "Please fill all fields.");
+            return;
         }
-//        Starter.loginFormReference.show();
-//        LoginController.userRegistration.hide();
+
+        userMail = txtEmail.getText().trim();
+        userName = txtName.getText().trim();
+        if (!isValidEmail(userMail)) {
+            showAlert(Alert.AlertType.ERROR, "Invalid Email", "Please enter a valid email address.");
+            return;
+        }
+
+        registrationOtp = generateOTP();
+        if (!sendMail(userMail, registrationOtp, userName)) {
+            showAlert(Alert.AlertType.ERROR, "Email Error", "Please check your internet connection or email and try again.");
+            txtEmail.clear();
+            return;
+        }
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/OTPDialogBox.fxml"));
+        Scene scene = new Scene(loader.load());
+        OTPDialogController controller = loader.getController();
+        controller.setOtp(registrationOtp);
+        controller.setOnSuccess(this::registerUserSafely);
+
+        LoginController.userRegistration.hide();
+        OTPDialogBox.setScene(scene);
+        OTPDialogBox.show();
     }
 
+    @FXML
     public void onBackClick(ActionEvent actionEvent) {
         Starter.loginFormReference.show();
         LoginController.userRegistration.hide();
     }
-    //send mail to customer
-    public boolean sendMail(String Email,int OTP,String name){
-        /*return EmailUtil.sendEmail(
-                Email,
-                "Welcome to Book Borrowing System 📚",
-                "Hello "+name+",\n\nYour Registration 0OTP is "+OTP+".\n\nThanks,\nTeam Library"
-        );*/
 
-        System.out.println(OTP);
-        return true;
+    public boolean sendMail(String email, int otp, String name) {
+        return EmailUtil.sendEmail(
+                email,
+                "Welcome to Book Borrowing System",
+                "Hello " + name + ",\n\nYour registration OTP is " + otp + ".\n\nThanks,\nTeam Library"
+        );
     }
-    //Email validation
+
     public static boolean isValidEmail(String email) {
         String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
         return email.matches(emailRegex);
     }
-    //Validate all fields are fill or not
+
     private boolean validateFields() {
-        return  !txtNIC.getText().isEmpty() &&
-                !txtName.getText().isEmpty() &&
-                !txtEmail.getText().isEmpty() &&
-                !txtPhone.getText().isEmpty() &&
-                !txtAddress.getText().isEmpty() &&
-                dpDOB.getValue() != null;
+        return !txtNIC.getText().isBlank()
+                && !txtName.getText().isBlank()
+                && !txtEmail.getText().isBlank()
+                && !txtPhone.getText().isBlank()
+                && !txtAddress.getText().isBlank()
+                && dpDOB.getValue() != null;
     }
-    //OTP generator
-    public  int generateOTP() {
-        Random random = new Random();
-        registrationOtp = 100000 + random.nextInt(900000);
+
+    public int generateOTP() {
+        registrationOtp = ThreadLocalRandom.current().nextInt(100000, 1000000);
         return registrationOtp;
     }
 
     public void registerUser() throws SQLException {
-        if (userService.UserRegistration(
+        boolean isRegistered = userService.UserRegistration(
                 new UserRegistrationDTO(
-                        txtNIC.getText(),
+                        txtNIC.getText().trim(),
                         userName,
                         dpDOB.getValue(),
                         userMail,
-                        txtPhone.getText(),
-                        txtAddress.getText(),
+                        txtPhone.getText().trim(),
+                        txtAddress.getText().trim(),
                         10
                 )
-        )) {
-            Starter.loginFormReference.show();
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setHeaderText(null);
-            alert.setContentText("Registration Successful!");
-            alert.show();
-            OTPDialogBox.hide();
-        }
+        );
 
+        if (isRegistered) {
+            Starter.loginFormReference.show();
+            showAlert(Alert.AlertType.INFORMATION, "Success", "Registration successful.");
+            OTPDialogBox.hide();
+        } else {
+            showAlert(Alert.AlertType.ERROR, "Registration Failed", "Unable to register user.");
+        }
     }
 
+    private void registerUserSafely() {
+        try {
+            registerUser();
+        } catch (SQLException e) {
+            showAlert(Alert.AlertType.ERROR, "Database Error", "Unable to complete registration right now.");
+        }
+    }
+
+    private void showAlert(Alert.AlertType type, String title, String content) {
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
 }

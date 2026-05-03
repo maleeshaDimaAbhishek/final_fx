@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -14,94 +15,112 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import lombok.Setter;
 
-import javax.swing.*;
 import java.io.IOException;
-import java.util.Random;
-
 
 public class OTPLoginController {
-    int OTP=0;
+    private int otp = 0;
+    private String loggedInUserNic = "UNKNOWN";
+    private String loggedInUserName = "User";
 
     @Setter
-    int roleId;
-    public static Stage userDashBoard=new Stage();
-    public static Stage adminDashBoard=new Stage();
-    public static Stage staffDashBoard=new Stage();
+    private int roleId;
+
+    public static final Stage userDashBoard = new Stage();
+    public static final Stage adminDashBoard = new Stage();
+    public static final Stage staffDashBoard = new Stage();
+
     @FXML
     private ImageView bookImage;
-
     @FXML
     private Button btnLogin;
-
     @FXML
     private StackPane leftPane;
-
     @FXML
     private ImageView libraryImage;
-
     @FXML
     private StackPane rightPane;
-
     @FXML
     private TextField txtOtp;
 
+    @FXML
     public void initialize() {
         bookImage.setImage(new Image("/image/library.png"));
         libraryImage.setImage(new Image("/image/openbook.jpeg"));
     }
-    public  int generateOTP() {
-        Random random = new Random();
-         OTP = 100000 + random.nextInt(900000);
-        return OTP;
-    }
 
     public void setOTP(int otp) {
-        OTP = otp;
-        System.out.println("Received OTP: " + otp);
+        this.otp = otp;
     }
-    public void btnGetOTP(ActionEvent Event) throws IOException {
-        String userOtp=txtOtp.getText();
-        try {
-            if(Integer.parseInt(txtOtp.getText())==OTP){
-                LoginController.otpLogin.hide();
-                System.out.println(roleId);
-                if(roleId==10){
-                    userDashBoard.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/UserDashBoardForm.fxml"))));
-                    userDashBoard.show();
-                }else if(roleId==11){
-                    adminDashBoard.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/AdminDashBoard.fxml"))));
-                    adminDashBoard.show();
-                }else{
-                    staffDashBoard.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/StaffDashBoard.fxml"))));
-                    staffDashBoard.show();
-                }
-            }else {
-                txtOtp.setText("");
-                JOptionPane.showMessageDialog(
-                        null,
-                        "❌ Incorrect OTP! Please try again.",
-                        "OTP Status",
-                        JOptionPane.ERROR_MESSAGE
-                );
-            }
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(
-                    null,
-                    "❌ Incorrect OTP! Please Enter Valid One.",
-                    "OTP Status",
-                    JOptionPane.ERROR_MESSAGE
-            );
+
+    public void setLoggedInUser(String userNic, String userName) {
+        if (userNic != null && !userNic.isBlank()) {
+            this.loggedInUserNic = userNic;
+        }
+        if (userName != null && !userName.isBlank()) {
+            this.loggedInUserName = userName;
         }
     }
-    public void onActionDidnotgetOTP(MouseEvent mouseEvent) {
-        JOptionPane.showMessageDialog(
-                null,
-                "✅ Check Your Mail !",
-                "OTP Status",
-                JOptionPane.INFORMATION_MESSAGE
-        );
+
+    @FXML
+    public void btnGetOTP(ActionEvent event) throws IOException {
+        String rawOtp = txtOtp.getText() == null ? "" : txtOtp.getText().trim();
+        if (rawOtp.isEmpty()) {
+            showAlert(Alert.AlertType.ERROR, "OTP Status", "Please enter the OTP.");
+            return;
+        }
+
+        int userOtp;
+        try {
+            userOtp = Integer.parseInt(rawOtp);
+        } catch (NumberFormatException e) {
+            showAlert(Alert.AlertType.ERROR, "OTP Status", "Incorrect OTP! Please enter a valid OTP.");
+            txtOtp.clear();
+            return;
+        }
+
+        if (userOtp != otp) {
+            txtOtp.clear();
+            showAlert(Alert.AlertType.ERROR, "OTP Status", "Incorrect OTP! Please try again.");
+            return;
+        }
+
+        LoginController.otpLogin.hide();
+        switch (roleId) {
+            case 10:
+                FXMLLoader userLoader = new FXMLLoader(getClass().getResource("/view/UserDashBoardForm.fxml"));
+                Scene userScene = new Scene(userLoader.load());
+                UserDashBoardFormController userController = userLoader.getController();
+                userController.setLoggedInUser(loggedInUserNic, loggedInUserName);
+                userDashBoard.setScene(userScene);
+                userDashBoard.show();
+                break;
+            case 11:
+                adminDashBoard.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/AdminDashBoard.fxml"))));
+                adminDashBoard.show();
+                break;
+            default:
+                staffDashBoard.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/StaffDashBoard.fxml"))));
+                staffDashBoard.show();
+                break;
+        }
     }
+
+    @FXML
+    public void onActionDidnotgetOTP(MouseEvent mouseEvent) {
+        showAlert(Alert.AlertType.INFORMATION, "OTP Status", "Check your mail for the OTP.");
+    }
+
+    @FXML
     public void onActionBack(ActionEvent actionEvent) {
+        LoginController.otpLogin.hide();
         Starter.loginFormReference.show();
+    }
+
+    private void showAlert(Alert.AlertType type, String title, String content) {
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
     }
 }

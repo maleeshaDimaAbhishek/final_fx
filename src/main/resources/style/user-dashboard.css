@@ -1,0 +1,130 @@
+.user-root {
+    -fx-font-family: "Poppins", "Segoe UI", sans-serif;
+    -fx-background-color: linear-gradient(to bottom right, #f7f4ed, #eef7ff 55%, #ecfff5 100%);
+}
+
+.top-shell {
+    -fx-background-color: rgba(255, 255, 255, 0.9);
+    -fx-background-radius: 0 0 18 18;
+    -fx-border-color: rgba(22, 55, 91, 0.15);
+    -fx-border-width: 0 0 1 0;
+}
+
+.brand-title {
+    -fx-text-fill: #16375b;
+}
+
+.brand-subtitle {
+    -fx-text-fill: #55789f;
+    -fx-font-size: 12px;
+}
+
+.search-field {
+    -fx-background-color: #f8fcff;
+    -fx-background-radius: 12;
+    -fx-border-color: rgba(22, 55, 91, 0.25);
+    -fx-border-radius: 12;
+    -fx-text-fill: #234f7f;
+    -fx-prompt-text-fill: #7891ab;
+    -fx-padding: 10 12 10 12;
+}
+
+.search-field:focused {
+    -fx-border-color: rgba(22, 55, 91, 0.5);
+}
+
+.primary-btn {
+    -fx-background-color: linear-gradient(to right, #3d87f5, #5ca8ff);
+    -fx-text-fill: white;
+    -fx-background-radius: 10;
+    -fx-padding: 9 16 9 16;
+    -fx-cursor: hand;
+}
+
+.primary-btn:hover {
+    -fx-background-color: linear-gradient(to right, #3479df, #5297e7);
+}
+
+.ghost-btn {
+    -fx-background-color: rgba(28, 86, 148, 0.1);
+    -fx-text-fill: #255687;
+    -fx-background-radius: 10;
+    -fx-padding: 9 16 9 16;
+    -fx-cursor: hand;
+}
+
+.ghost-btn:hover {
+    -fx-background-color: rgba(28, 86, 148, 0.18);
+}
+
+.danger-btn {
+    -fx-background-color: linear-gradient(to right, #ff7f64, #f04f6d);
+    -fx-text-fill: white;
+    -fx-background-radius: 10;
+    -fx-padding: 9 16 9 16;
+    -fx-cursor: hand;
+}
+
+.danger-btn:hover {
+    -fx-background-color: linear-gradient(to right, #f16d53, #df455f);
+}
+
+.left-panel {
+    -fx-background-color: rgba(255, 255, 255, 0.88);
+    -fx-background-radius: 16;
+    -fx-padding: 14;
+}
+
+.panel-title {
+    -fx-text-fill: #1b406b;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+.metric-card {
+    -fx-background-color: linear-gradient(to right, #e8f2ff, #f0f8ff);
+    -fx-background-radius: 12;
+    -fx-padding: 12;
+}
+
+.metric-label {
+    -fx-text-fill: #547294;
+    -fx-font-size: 12px;
+}
+
+.metric-value {
+    -fx-text-fill: #1b4b7d;
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+}
+
+.order-list {
+    -fx-background-color: #f9fcff;
+    -fx-background-radius: 12;
+    -fx-border-color: rgba(22, 55, 91, 0.15);
+    -fx-border-radius: 12;
+}
+
+.order-list .list-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: #2d5782;
+    -fx-padding: 8 10 8 10;
+}
+
+.order-list .list-cell:filled:selected {
+    -fx-background-color: #e5f1ff;
+}
+
+.helper-label {
+    -fx-text-fill: #6a7f95;
+    -fx-font-size: 11px;
+}
+
+.books-scroll {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.books-scroll .viewport {
+    -fx-background-color: transparent;
+}

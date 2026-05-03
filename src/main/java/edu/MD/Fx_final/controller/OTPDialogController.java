@@ -20,16 +20,30 @@ public class OTPDialogController {
     }
     @FXML
     public void onVerifyClick(ActionEvent event) {
-        if (txtOTP.getText() == null) return;
-
-        if (registrationOtp == Integer.parseInt(txtOTP.getText())) {
-            if (onSuccess != null) onSuccess.run();
-        } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText(null);
-            alert.setContentText("Invalid OTP!");
-            alert.show();
+        String value = txtOTP.getText() == null ? "" : txtOTP.getText().trim();
+        if (value.isEmpty()) {
+            showInvalidOtpAlert();
+            return;
         }
+
+        try {
+            if (registrationOtp == Integer.parseInt(value)) {
+                if (onSuccess != null) {
+                    onSuccess.run();
+                }
+            } else {
+                showInvalidOtpAlert();
+            }
+        } catch (NumberFormatException e) {
+            showInvalidOtpAlert();
+        }
+    }
+
+    private void showInvalidOtpAlert() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setHeaderText(null);
+        alert.setContentText("Invalid OTP!");
+        alert.show();
     }
 
     public void onCancelClick(ActionEvent actionEvent) {
@@ -37,4 +51,3 @@ public class OTPDialogController {
         LoginController.userRegistration.show();
     }
 }
-
