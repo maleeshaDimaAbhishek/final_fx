@@ -24,6 +24,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -105,6 +106,20 @@ public class StaffDashboardController {
     private TableColumn<BookCardDTO, String> categoryCol;
     @FXML
     private TableColumn<BookCardDTO, Integer> copiesCol;
+    @FXML
+    private TextField bookTitleField;
+    @FXML
+    private TextField bookAuthorField;
+    @FXML
+    private TextField bookPublisherField;
+    @FXML
+    private TextField bookYearField;
+    @FXML
+    private TextField bookCategoryField;
+    @FXML
+    private TextField bookCopiesField;
+    @FXML
+    private TextField bookImageField;
 
     @FXML
     private TableView<BookOrderDTO> ordersTable;
@@ -206,6 +221,69 @@ public class StaffDashboardController {
     }
 
     @FXML
+    public void handleAddBookAction(ActionEvent actionEvent) {
+        BookCardDTO bookToAdd = buildBookFromForm();
+        if (bookToAdd == null) {
+            return;
+        }
+
+        try {
+            boolean added = bookService.addBook(bookToAdd);
+            if (added) {
+                showInfo("Books", "Book added successfully.");
+                clearBookForm();
+                loadBooks();
+                visibleBooks.setAll(allBooks);
+                updateStats();
+                addActivity("Added book: " + bookToAdd.getTitle());
+            } else {
+                showInfo("Books", "Book was not added.");
+            }
+        } catch (SQLIntegrityConstraintViolationException e) {
+            showInfo("Books Error", "Add blocked: a book with same title and author already exists.");
+        } catch (SQLException e) {
+            showInfo("Books Error", "Unable to add book right now.\n" + e.getMessage());
+        }
+    }
+
+    @FXML
+    public void handleUpdateBookAction(ActionEvent actionEvent) {
+        BookCardDTO selectedBook = booksTable.getSelectionModel().getSelectedItem();
+        if (selectedBook == null) {
+            showInfo("Books", "Select a book from the table to update.");
+            return;
+        }
+
+        BookCardDTO updatedBook = buildBookFromForm();
+        if (updatedBook == null) {
+            return;
+        }
+
+        try {
+            boolean updated = bookService.updateBook(selectedBook.getTitle(), selectedBook.getAuthor(), updatedBook);
+            if (updated) {
+                showInfo("Books", "Book updated successfully.");
+                clearBookForm();
+                loadBooks();
+                visibleBooks.setAll(allBooks);
+                updateStats();
+                addActivity("Updated book: " + selectedBook.getTitle());
+            } else {
+                showInfo("Books", "No matching book found to update.");
+            }
+        } catch (SQLIntegrityConstraintViolationException e) {
+            showInfo("Books Error", "Update blocked: another book already uses this title and author.");
+        } catch (SQLException e) {
+            showInfo("Books Error", "Unable to update book right now.\n" + e.getMessage());
+        }
+    }
+
+    @FXML
+    public void handleClearBookFormAction(ActionEvent actionEvent) {
+        clearBookForm();
+    }
+
+    @FXML
     public void handleSearchUsersAction(ActionEvent actionEvent) {
         String query = normalize(searchUsersField.getText());
         if (query.isEmpty()) {
@@ -300,6 +378,7 @@ public class StaffDashboardController {
         categoryCol.setCellValueFactory(new PropertyValueFactory<>("category"));
         copiesCol.setCellValueFactory(new PropertyValueFactory<>("available_copies"));
         booksTable.setItems(visibleBooks);
+        booksTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> populateBookForm(newValue));
     }
 
     private void setupOrdersTable() {
@@ -372,6 +451,68 @@ public class StaffDashboardController {
         activeBorrowingsLabel.setText(String.valueOf(allOrders.size()));
     }
 
+    private void populateBookForm(BookCardDTO book) {
+        if (book == null) {
+            return;
+        }
+        bookTitleField.setText(book.getTitle());
+        bookAuthorField.setText(book.getAuthor());
+        bookPublisherField.setText(book.getPublisher());
+        bookYearField.setText(book.getPublished_year());
+        bookCategoryField.setText(book.getCategory());
+        bookCopiesField.setText(String.valueOf(book.getAvailable_copies()));
+        bookImageField.setText(book.getImageLink());
+    }
+
+    private BookCardDTO buildBookFromForm() {
+        String title = normalizeInput(bookTitleField.getText());
+        String author = normalizeInput(bookAuthorField.getText());
+        String publisher = normalizeInput(bookPublisherField.getText());
+        String year = normalizeInput(bookYearField.getText());
+        String category = normalizeInput(bookCategoryField.getText());
+        String copiesRaw = normalizeInput(bookCopiesField.getText());
+        String imageLink = normalizeInput(bookImageField.getText());
+
+        if (title.isEmpty() || author.isEmpty()) {
+            showInfo("Validation", "Title and author are required.");
+            return null;
+        }
+
+        if (year.isEmpty()) {
+            showInfo("Validation", "Published year is required.");
+            return null;
+        }
+        if (!year.matches("\\d{4}")) {
+            showInfo("Validation", "Published year must be a 4-digit value.");
+            return null;
+        }
+
+        int copies;
+        try {
+            copies = Integer.parseInt(copiesRaw);
+            if (copies < 0) {
+                showInfo("Validation", "Available copies cannot be negative.");
+                return null;
+            }
+        } catch (NumberFormatException e) {
+            showInfo("Validation", "Available copies must be a number.");
+            return null;
+        }
+
+        return new BookCardDTO(title, author, publisher, year, category, copies, imageLink);
+    }
+
+    private void clearBookForm() {
+        bookTitleField.clear();
+        bookAuthorField.clear();
+        bookPublisherField.clear();
+        bookYearField.clear();
+        bookCategoryField.clear();
+        bookCopiesField.clear();
+        bookImageField.clear();
+        booksTable.getSelectionModel().clearSelection();
+    }
+
     private void showOverview() {
         showPane(overviewPane);
     }
@@ -416,6 +557,13 @@ public class StaffDashboardController {
             return "";
         }
         return value.trim().toLowerCase(Locale.ROOT);
+    }
+
+    private String normalizeInput(String value) {
+        if (value == null) {
+            return "";
+        }
+        return value.trim();
     }
 
     private void showInfo(String title, String message) {

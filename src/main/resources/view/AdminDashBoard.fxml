@@ -7,6 +7,7 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.FlowPane?>
@@ -134,6 +135,33 @@
                         <TableColumn fx:id="copiesCol" text="Available" prefWidth="95"/>
                     </columns>
                 </TableView>
+
+                <VBox styleClass="form-card" spacing="10">
+                    <Label text="Add / Update Book" styleClass="panel-title"/>
+                    <GridPane hgap="10" vgap="10">
+                        <columnConstraints>
+                            <ColumnConstraints percentWidth="16.6"/>
+                            <ColumnConstraints percentWidth="16.6"/>
+                            <ColumnConstraints percentWidth="16.6"/>
+                            <ColumnConstraints percentWidth="16.6"/>
+                            <ColumnConstraints percentWidth="16.6"/>
+                            <ColumnConstraints percentWidth="16.6"/>
+                        </columnConstraints>
+
+                        <TextField fx:id="bookTitleField" promptText="Title" styleClass="search-field" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                        <TextField fx:id="bookAuthorField" promptText="Author" styleClass="search-field" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                        <TextField fx:id="bookPublisherField" promptText="Publisher" styleClass="search-field" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
+                        <TextField fx:id="bookYearField" promptText="Published Year" styleClass="search-field" GridPane.columnIndex="3" GridPane.rowIndex="0"/>
+                        <TextField fx:id="bookCategoryField" promptText="Category" styleClass="search-field" GridPane.columnIndex="4" GridPane.rowIndex="0"/>
+                        <TextField fx:id="bookCopiesField" promptText="Available Copies" styleClass="search-field" GridPane.columnIndex="5" GridPane.rowIndex="0"/>
+                        <TextField fx:id="bookImageField" promptText="Image URL / Path" styleClass="search-field" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.columnSpan="4"/>
+                        <Button text="Add Book" styleClass="primary-btn" onAction="#handleAddBookAction" GridPane.columnIndex="4" GridPane.rowIndex="1"/>
+                        <Button text="Update Selected" styleClass="ghost-btn" onAction="#handleUpdateBookAction" GridPane.columnIndex="5" GridPane.rowIndex="1"/>
+                    </GridPane>
+                    <HBox alignment="CENTER_RIGHT">
+                        <Button text="Clear Form" styleClass="ghost-btn" onAction="#handleClearBookFormAction"/>
+                    </HBox>
+                </VBox>
             </VBox>
 
             <VBox fx:id="modulePane" spacing="16" visible="false" managed="false" styleClass="module-pane">

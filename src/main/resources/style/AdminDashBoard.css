@@ -187,6 +187,28 @@
     -fx-padding: 8;
 }
 
+.form-card {
+    -fx-background-color: rgba(255, 255, 255, 0.9);
+    -fx-background-radius: 14;
+    -fx-border-color: rgba(31, 66, 104, 0.14);
+    -fx-border-radius: 14;
+    -fx-padding: 12;
+}
+
+.search-field {
+    -fx-background-color: #f7fbff;
+    -fx-background-radius: 10;
+    -fx-border-color: rgba(35, 86, 135, 0.24);
+    -fx-border-radius: 10;
+    -fx-text-fill: #2a4869;
+    -fx-prompt-text-fill: #7393b1;
+    -fx-padding: 8 12 8 12;
+}
+
+.search-field:focused {
+    -fx-border-color: rgba(35, 86, 135, 0.5);
+}
+
 .module-pane {
     -fx-background-color: rgba(255, 255, 255, 0.88);
     -fx-background-radius: 16;

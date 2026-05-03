@@ -8,7 +8,7 @@ public class EmailUtil {
     private static final String SMTP_HOST = "smtp.gmail.com";
     private static final String SMTP_PORT = "587";
     private static final String FALLBACK_FROM_EMAIL = "maleeshadimal20@gmail.com";
-    private static final String FALLBACK_PASSWORD = "pwfu hzcp lxgv opiz";
+    private static final String FALLBACK_PASSWORD = "oiys xvdl rukr rewy";
 
     public static boolean sendEmail(String toEmail, String subject, String messageText) {
         if (toEmail == null || toEmail.isBlank()) {
